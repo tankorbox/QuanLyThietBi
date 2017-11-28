@@ -9,8 +9,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.ChiTietTTSD;
+import beans.NguoiDung;
 import beans.ThietBi;
 import library.LibraryLogin;
 import models.baoduongModel;
@@ -46,6 +48,12 @@ public class ThietBiKhaDungController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LibraryLogin mLogin = new LibraryLogin();
 		if(!mLogin.Login(request,response)){
+			return;
+		}
+		HttpSession session = request.getSession();
+		NguoiDung objUser = (NguoiDung)session.getAttribute("nguoidung");
+		if(objUser.getPhanQuyen() == 1) {
+			response.sendRedirect(request.getContextPath()+"/index");
 			return;
 		}
 		response.setCharacterEncoding("utf-8");
