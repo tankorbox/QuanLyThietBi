@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import library.LibraryLogin;
 import library.ThietBiKhaDung;
 import models.baoduongModel;
 import models.loaithietbiModels;
@@ -39,6 +40,10 @@ public class SoLuongKhaDungController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		PrintWriter out = response.getWriter();
 		ThietBiKhaDung khaDung = new ThietBiKhaDung();
 		int maLoai = Integer.parseInt(request.getParameter("maTB"));

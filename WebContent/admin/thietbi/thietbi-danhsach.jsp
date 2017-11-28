@@ -39,29 +39,29 @@
 		</div>
 
 		<div class="table-responsive">
-			<table class="table table-striped" width="100%" cellspacing="0">
+			<table class="table table-striped" width="100%" cellspacing="0" id="dataTable">
 				<thead>
 					<tr>
-						<th>#</th>
-						<th>Tên thiết bị</th>
-						<th>Loại thiết bị</th>
-						<th class="text-center">Ngày nhập</th>
-						<th class="text-center" colspan="3">Chi tiết</th>
+						<th class="text-center">#</th>
+						<th class="text-center">Tên thiết bị</th>
+						<th class="text-center" width="30%">Loại thiết bị</th>
+						<th class="text-center" width="20%">Ngày nhập</th>
+						<th class="text-center" colspan="3" width="30%">Chi tiết</th>
 					</tr>
 				</thead>
 				<tbody>
 				<% for(ThietBi item: alThietBi) { %>
 					<tr>
-						<td><%=item.getMaTB() %></td>
-						<td><%=item.getTenTB() %></td>
-						<td><%=item.getObjLoaiTB().getTenLoai() %></td>
+						<td class="text-center"><%=item.getMaTB() %></td>
+						<td class="text-center"><%=item.getTenTB() %></td>
+						<td class="text-center"><%=item.getObjLoaiTB().getTenLoai() %></td>
 						<td class="text-center"><%=item.getNgayNhap() %></td>
-						<td class="text-center"><a
-							href="<%=request.getContextPath()%>/thietbi-sua?type=load&id=<%=item.getMaTB() %>"
-							class="btn btn-warning">Sửa</a> <a
-							href="<%=request.getContextPath()%>/thietbi?type=del&id=<%=item.getMaTB() %>"
-							class="btn btn-danger">Xóa</a> <a
-							href="<%=request.getContextPath()%>/thietbi-chitiet?id=<%=item.getMaTB() %>"
+						<td class="text-center">
+							<a href="<%=request.getContextPath()%>/thietbi-sua?type=load&id=<%=item.getMaTB() %>"
+							class="btn btn-warning">Sửa</a> 
+							<a href="<%=request.getContextPath()%>/thietbi?type=del&id=<%=item.getMaTB() %>"
+							class="btn btn-danger" onclick="return confirm(&#039;Are you sure?&#039;)">Xóa</a>
+							<a href="<%=request.getContextPath()%>/thietbi-chitiet?id=<%=item.getMaTB() %>"
 							class="btn btn-success">Chi tiết</a>
 					</tr>
 					<%} %>

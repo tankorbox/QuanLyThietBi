@@ -8,11 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import beans.NguoiDung;
 import beans.ThongTinDangKy;
 import beans.ThongTinDangKy.Builder;
 import beans.ThongTinSuDung;
 import library.LibraryFormatDateTime;
+import library.LibraryLogin;
 import library.ThietBiKhaDung;
 import models.thietbiModels;
 import models.thongtindangkyModels;
@@ -44,6 +47,16 @@ public class PheDuyetController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
+		HttpSession session = request.getSession();
+		NguoiDung objUser = (NguoiDung)session.getAttribute("nguoidung");
+		if(objUser.getPhanQuyen() == 1) {
+			response.sendRedirect(request.getContextPath()+"/index");
+			return;
+		}
 		thongtindangkyModels mTTDK = new thongtindangkyModels();
 		thongtinsudungModels mTTSD = new thongtinsudungModels();
 		ThietBiKhaDung khadung = new ThietBiKhaDung();

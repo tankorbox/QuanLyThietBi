@@ -9,8 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import beans.NguoiDung;
 import beans.ThongTinSuDung;
+import library.LibraryLogin;
 import models.thongtinsudungModels;
 
 /**
@@ -39,6 +42,16 @@ public class CapNhatSuDungController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
+		HttpSession session = request.getSession();
+		NguoiDung objUser = (NguoiDung)session.getAttribute("nguoidung");
+		if(objUser.getPhanQuyen() == 1) {
+			response.sendRedirect(request.getContextPath()+"/index");
+			return;
+		}
 		thongtinsudungModels mTTSD = new thongtinsudungModels();
 		ArrayList<ThongTinSuDung> alTTSD = mTTSD.getList();
 		request.setAttribute("alTTSD", alTTSD);

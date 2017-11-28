@@ -41,7 +41,7 @@
                   <td><%= thietBi.getTenTB() %></td>
                   <td>Đang sử dụng</td>
                   <td class="text-center">
-          			<a href="<%= request.getContextPath() %>/baoduong-chitiet?maTB=<%= thietBi.getMaTB() %>" class="btn btn-success">Chi tiết</a>
+          			<a href="<%= request.getContextPath() %>/thietbi-chitiet?maTB=<%= thietBi.getMaTB() %>" class="btn btn-success">Chi tiết</a>
           			<a href="<%= request.getContextPath() %>/baoduong-dangky?maTB=<%= thietBi.getMaTB() %>" class="btn btn-warning">Đăng ký bảo dưỡng</a>
                   </td>
                 </tr>
