@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.LoaiThietBi;
 import beans.ThietBi;
+import library.LibraryLogin;
 import models.loaithietbiModels;
 import models.thietbiModels;
 
@@ -44,6 +45,10 @@ public class ThietBiIndexController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		thietbiModels mThietbiModels = new thietbiModels();
 		loaithietbiModels mLoaithietbiModels = new loaithietbiModels();
 		if ((request.getParameter("type") != null) && request.getParameter("type").equals("del")) {

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.ThongTinDangKy;
+import library.LibraryLogin;
 import models.thongtindangkyModels;
 
 /**
@@ -37,6 +38,10 @@ public class PheDuyetDangKyController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		thongtindangkyModels mTTDK = new thongtindangkyModels();
 		ArrayList<ThongTinDangKy> alTTDK = mTTDK.getList();
 		request.setAttribute("alTTDK", alTTDK);

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import library.LibraryLogin;
 import models.loaithietbiModels;
 import models.thietbiModels;
 
@@ -36,6 +37,10 @@ public class DanhSachThietBiController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		loaithietbiModels mLoaiThietBi = new loaithietbiModels();
 		request.setAttribute("alLoaiThietBi", mLoaiThietBi.getList());
 		

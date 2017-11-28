@@ -151,7 +151,7 @@ public class thietbiModels {
 	public int themThietBi(ThietBi thietBi) {
 		int result = 0;
 		conn = lcdb.GetConnectMySQL();
-		String query = "INSERT INTO `ThietBi` (`tentb`, `maloaitb`, `ngaynhap`) VALUES (?, ?, ?);";
+		String query = "INSERT INTO ThietBi (TenTB, MaLoaiTB, NgayNhap) VALUES (?, ?, ?)";
 		try {
 			pst = conn.prepareStatement(query);
 			pst.setString(1, thietBi.getTenTB());
@@ -176,7 +176,7 @@ public class thietbiModels {
 	public int chinhSuaThietBi(ThietBi thietBi) {
 		int result = 0;
 		conn = lcdb.GetConnectMySQL();
-		String query = "UPDATE `thietbi` SET `tentb`=?, `maloaitb`=?,`ngaynhap`=? WHERE matb = ? LIMIT 1";
+		String query = "UPDATE ThietBi SET TenTB=?, MaLoaiTB=?,NgayNhap=? WHERE MaTB = ? LIMIT 1";
 		try {
 			pst = conn.prepareStatement(query);
 			pst.setString(1, thietBi.getTenTB());
@@ -202,7 +202,7 @@ public class thietbiModels {
 	public int xoaThietBi(int maTB) {
 		int result = 0;
 		conn = lcdb.GetConnectMySQL();
-		String sql = "DELETE FROM `thietbi` WHERE `matb` =  ? ";
+		String sql = "DELETE FROM ThietBi WHERE MaTB =  ? ";
 		try {
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, maTB);
@@ -224,17 +224,17 @@ public class thietbiModels {
 
 	// LAY THEO MA THIET BI
 	public ThietBi getById(int matb) {
-		String sql = "SELECT * FROM thietbi WHERE matb = " + matb;
+		String sql = "SELECT * FROM ThietBi WHERE MaTB = " + matb;
 		ThietBi objItem = null;
 		conn = lcdb.GetConnectMySQL();
 		try {
 			st = conn.createStatement();
 			rs = st.executeQuery(sql);
 			while (rs.next()) {
-				int MaTB = rs.getInt("matb");
-				String TenTB = rs.getString("tentb");
-				int MaLoaiTB = rs.getInt("maloaitb");
-				Date NgayNhap = rs.getDate("ngaynhap");
+				int MaTB = rs.getInt("MaTB");
+				String TenTB = rs.getString("TenTB");
+				int MaLoaiTB = rs.getInt("MaLoaiTB");
+				Date NgayNhap = rs.getDate("NgayNhap");
 
 				ThietBi.Builder tbBuilder = new ThietBi.Builder();
 				tbBuilder.setMaTB(MaTB);
@@ -242,7 +242,6 @@ public class thietbiModels {
 				tbBuilder.setMaLoaiTB(MaLoaiTB);
 				tbBuilder.setNgayNhap(NgayNhap);
 				objItem = tbBuilder.build();
-				System.out.println(objItem.getMaLoaiTB());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -266,46 +265,39 @@ public class thietbiModels {
 			boolean before = false;
 			if (matb!=-1) {
 				before = true;
-				query+= "matb=?";
+				query+= "MaTB=?";
 			}
 			if (tentb!=null) {
-				if (before) query+=" and ";
-				query+= "tentb LIKE ?";
+				if (before) query+=" AND ";
+				query+= "TenTB LIKE ?";
 				before = true;
 			}
 			if (maloaitb!=-1) {
-				if (before) query+=" and ";
-				query+= "maloaitb=?";
+				if (before) query+=" AND ";
+				query+= "MaLoaiTB=?";
 				before = true;
 			}
 			
 			if (ngaynhap!=null) {
-				if (before) query+=" and ";
-				query+= "ngaynhap=?";
+				if (before) query+=" AND ";
+				query+= "NgayNhap=?";
 				before = true;
 			}
-			System.out.println(query);
-			
 			ThietBi.Builder builder = new ThietBi.Builder();
 			try {
 				int i = 1;
 				pst = conn.prepareStatement(query);
 				if (matb!=-1) {
 					pst.setInt(i++, matb);
-					System.out.println("da set mtb");
 				}
 				if (tentb!=null) {
 					pst.setString(i++,"%"+ tentb +"%");
-					System.out.println("da set tentb");
 				}
 				if (maloaitb!=-1) {
 					pst.setInt(i++, maloaitb);
-					System.out.println("da setmaloai");
 				}
 				if (ngaynhap!=null) {
-					System.out.println(i);
 					pst.setDate(i, ngaynhap);
-					System.out.println("da set ngay nhap");
 				}
 				rs = pst.executeQuery();
 				while (rs.next()) {

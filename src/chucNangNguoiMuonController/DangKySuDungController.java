@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import beans.LoaiThietBi;
 import beans.ThongTinDangKy;
 import library.LibraryFormatDateTime;
+import library.LibraryLogin;
 import models.loaithietbiModels;
 import models.thongtindangkyModels;
 
@@ -41,6 +42,10 @@ public class DangKySuDungController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		response.setCharacterEncoding("utf-8");
 		
 		LibraryFormatDateTime lbDateTime = new LibraryFormatDateTime();

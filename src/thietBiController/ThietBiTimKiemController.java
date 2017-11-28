@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.LoaiThietBi;
 import beans.ThietBi;
+import library.LibraryLogin;
 import models.loaithietbiModels;
 import models.thietbiModels;
 
@@ -42,6 +43,10 @@ public class ThietBiTimKiemController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		if (request.getParameter("type").equals("load")) {
 			ArrayList<LoaiThietBi> listLoaiTB = new loaithietbiModels().getList();
 			ArrayList<LoaiThietBi> sortedListLoaiTB = new ArrayList<>();

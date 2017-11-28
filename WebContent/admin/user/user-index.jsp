@@ -16,9 +16,18 @@
       </ol>
       <%if (request.getParameter("delmsg") != null && request.getParameter("delmsg").equals("1")) {%>
 				<div class="alert alert-success">Xóa thành công</div>
-			<%}%>
-		<%if (request.getParameter("delmsg") != null && request.getParameter("delmsg").equals("0")) {%>
-				<div class="alert alert-danger" style="color: red">Xóa thất bại</div> <%} %>
+			
+	  <%}
+      if (request.getParameter("delmsg") != null && request.getParameter("delmsg").equals("0")) {%>
+				<div class="alert alert-danger" style="color: red">Xóa thất bại</div>
+	  <%}
+      if (request.getParameter("add") != null && request.getParameter("add").equals("0")) {%>
+		<div class="alert alert-danger" style="color: red">Thêm người dùng thất bại</div>
+      <%}
+      if (request.getParameter("add") != null && request.getParameter("add").equals("1")) {%>
+		<div class="alert alert-success" style="color: red">Thêm người dùng thành công</div>
+    <%}
+      %>
       <div class="col-md-12" style="margin-bottom: 10px">
       	<a href="<%= request.getContextPath() %>/user-create" class="btn btn-success">THÊM NGƯỜI DÙNG</a>
       </div>
@@ -49,7 +58,6 @@
                   <td><%=nd.getObjPhongBan().getTenPhongBan() %></td>
                   <td class="text-center">
           			<a href="<%= request.getContextPath() %>/user-edit?id=<%=nd.getMaND() %>" class="btn btn-success">Sửa</a>
-          			<a href="<%= request.getContextPath() %>/user-delete?id=<%=nd.getMaND() %>" class="btn btn-danger">Xóa</a>
                   </td>
                 </tr>
                 <%} %>

@@ -12,16 +12,27 @@
         </li>
         <li class="breadcrumb-item active">Thêm người dùng</li>
       </ol>
-      <form>
+      <%
+      if (request.getParameter("add") != null && request.getParameter("add").equals("trung")) {%>
+		<div class="alert alert-danger" style="color: red">Tên đăng nhập đã được sử dụng</div>
+    <%}
+      if (request.getParameter("add") != null && request.getParameter("add").equals("mk")) {%>
+		<div class="alert alert-danger" style="color: red">Xác nhận mật khẩu không khớp!</div>
+  <%}
+      if (request.getParameter("add") != null && request.getParameter("add").equals("ns")) {%>
+		<div class="alert alert-danger" style="color: red">Ngày sinh không hợp lệ!</div>
+<%}
+      %>
+      <form method="post" action="<%= request.getContextPath() %>/user-store">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <label for="tendangnhap">Tên đăng nhập</label>
-                <input class="form-control" type="text" name="tendangnhap">
+                <input class="form-control" type="text" name="tendangnhap" required>
               </div>
               <div class="col-md-6">
                 <label for="tennguoidung">Tên người dùng (Họ và tên)</label>
-                <input class="form-control" type="text" name="tennguoidung">
+                <input class="form-control" type="text" name="tennguoidung" required>
               </div>
             </div>
           </div>
@@ -29,11 +40,11 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="MatKhau">Mật khẩu</label>
-                <input class="form-control" type="password" name="MatKhau">
+                <input class="form-control" type="password" name="matkhau" required>
               </div>
               <div class="col-md-6">
                 <label for="XacNhanMatKhau">Xác nhận mật khẩu</label>
-                <input class="form-control" type="password" name="XacNhanMatKhau">
+                <input class="form-control" type="password" name="xacnhanmatkhau" required>
               </div>
             </div>
           </div>
@@ -41,29 +52,29 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="GioiTinh">Giới tính</label>
-                <select class="form-control" name="GioiTinh">
+                <select class="form-control" name="gioitinh" required>
                 	<option value="1">Nam</option>
                 	<option value="2">Nữ</option>
                 </select>
               </div>
               <div class="col-md-6">
-                <label for="NgaySinh">Ngày sinh</label>
-                <input class="form-control" type="date" name="NgaySinh">
+                <label for="ngaysinh">Ngày sinh</label>
+                <input class="form-control" type="date" name="ngaysinh" required>
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                <label for="ChucVu">Chức vụ</label>
-                <select class="form-control" name="ChucVu">
+                <label for="chucvu">Chức vụ</label>
+                <select class="form-control" name="chucvu" required>
                 	<option value="1">Admin</option>
                 	<option value="2">Nhân viên</option>
                 </select>
               </div>
               <div class="col-md-6">
-                <label for="PhongBan">Phòng ban</label>
-                <select class="form-control" name="PhongBan">
+                <label for="phongban">Phòng ban</label>
+                <select class="form-control" name="phongban" required>
                 	<option value="1">Phòng 1</option>
                 	<option value="2">Phòng 2</option>
                 </select>
@@ -73,16 +84,15 @@
           <div class="form-group">
             <div class="form-row">      
            		<div class="col-md-6">
-                <label for="PhanQuyen">Phân quyền</label>
-                <select class="form-control" name="PhanQuyen">
+                <label for="phanquyen">Phân quyền</label>
+                <select class="form-control" name="phanquyen" required>
                 	<option value="1">Người mượn</option>
                 	<option value="2">Nhân Viên</option>
-                	<option value="3">Quản trị Viên</option>
                 </select>
               </div>
               <div class="col-md-6">
-                <label for="DiaChi">Địa chỉ</label>
-                <input class="form-control" type="text" name="DiaChi">
+                <label for=diachi>Địa chỉ</label>
+                <input class="form-control" type="text" name="diachi" required>
               </div>
             </div>
           </div>

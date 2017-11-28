@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.LoaiThietBi;
 import beans.ThietBi;
+import library.LibraryLogin;
 import models.loaithietbiModels;
 import models.thietbiModels;
 
@@ -41,9 +42,12 @@ public class ThietBiChiTietController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		//Tìm thiết bị
-		int id = Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("maTB"));
 		thietbiModels tbModels = new thietbiModels();
 		ThietBi thietbi = tbModels.getById(id);
 		//Tìm tên loại thiết bị

@@ -13,6 +13,7 @@ import beans.ThongTinDangKy;
 import beans.ThongTinDangKy.Builder;
 import beans.ThongTinSuDung;
 import library.LibraryFormatDateTime;
+import library.LibraryLogin;
 import library.ThietBiKhaDung;
 import models.thietbiModels;
 import models.thongtindangkyModels;
@@ -44,6 +45,10 @@ public class PheDuyetController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		thongtindangkyModels mTTDK = new thongtindangkyModels();
 		thongtinsudungModels mTTSD = new thongtinsudungModels();
 		ThietBiKhaDung khadung = new ThietBiKhaDung();

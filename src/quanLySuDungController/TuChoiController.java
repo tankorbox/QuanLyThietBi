@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import library.LibraryLogin;
 import models.thongtindangkyModels;
 
 /**
@@ -35,6 +36,10 @@ public class TuChoiController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		response.setCharacterEncoding("utf-8");
 		
 		int maTTDK = Integer.parseInt(request.getParameter("maTTDK"));

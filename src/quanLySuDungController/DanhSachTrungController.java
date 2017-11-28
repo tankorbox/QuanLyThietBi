@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import library.LibraryLogin;
+
 /**
  * Servlet implementation class DanhSachTrungController
  */
@@ -33,6 +35,10 @@ public class DanhSachTrungController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		int maLoai = Integer.parseInt(request.getParameter("maLoai"));
 		Long batDau = Long.parseLong(request.getParameter("batDau"));
 		Long ketThuc = Long.parseLong(request.getParameter("ketThuc"));

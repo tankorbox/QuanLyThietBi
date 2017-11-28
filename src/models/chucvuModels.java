@@ -28,14 +28,14 @@ public class chucvuModels {
 	public ArrayList<ChucVu> getList() {
 		ArrayList<ChucVu> alCV = new ArrayList<ChucVu>();
 		conn = lcdb.GetConnectMySQL();
-		String query = "SELECT * FROM chucvu";
+		String query = "SELECT * FROM ChucVu";
 		ChucVu.Builder builder = new ChucVu.Builder();
 		try {
 			st = conn.createStatement();
 			rs = st.executeQuery(query);
 			while (rs.next()) {
-				ChucVu pban = builder.setMaChucVu(rs.getInt("machucvu"))
-						.setTenChucVu(rs.getString("tenchucvu"))
+				ChucVu pban = builder.setMaChucVu(rs.getInt("MaChucVu"))
+						.setTenChucVu(rs.getString("TenChucVu"))
 						.build();
 				alCV.add(pban);
 			}
@@ -55,7 +55,7 @@ public class chucvuModels {
 	
 	
 	public ChucVu getById(int macv) {
-		String sql = "SELECT * FROM chucvu WHERE macv = " + macv;
+		String sql = "SELECT * FROM ChucVu WHERE MaChucVu = " + macv;
 		ChucVu objItem = null;
 		conn = lcdb.GetConnectMySQL();
 		try {
@@ -64,8 +64,8 @@ public class chucvuModels {
 			while (rs.next()) {
 
 				objItem = new ChucVu.Builder()
-						.setMaChucVu(rs.getInt("machucvu"))
-						.setTenChucVu(rs.getString("tenchucvu"))
+						.setMaChucVu(rs.getInt("MaChucVu"))
+						.setTenChucVu(rs.getString("TenChucVu"))
 						.build();
 			}
 		} catch (SQLException e) {

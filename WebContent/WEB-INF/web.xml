@@ -18,6 +18,30 @@
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>LoginController</servlet-name>
+    <servlet-class>userController.LoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginController</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LoginPostController</servlet-name>
+    <servlet-class>userController.LoginPostController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginPostController</servlet-name>
+    <url-pattern>/dang-nhap</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LogoutController</servlet-name>
+    <servlet-class>userController.LogoutController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutController</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>UserIndexController</servlet-name>
     <servlet-class>userController.UserIndexController</servlet-class>
   </servlet>
@@ -58,20 +82,36 @@
     <url-pattern>/user-update</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>UserDeleteController</servlet-name>
-    <servlet-class>userController.UserDeleteController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UserDeleteController</servlet-name>
-    <url-pattern>/user-delete</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>UserProfileController</servlet-name>
     <servlet-class>userController.UserProfileController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserProfileController</servlet-name>
     <url-pattern>/user-profile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UserNotFoundController</servlet-name>
+    <servlet-class>userController.UserNotFoundController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserNotFoundController</servlet-name>
+    <url-pattern>/user-notfound</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UserEditPasswordController</servlet-name>
+    <servlet-class>userController.UserEditPasswordController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserEditPasswordController</servlet-name>
+    <url-pattern>/user/reset-password</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UserUpdatePasswordController</servlet-name>
+    <servlet-class>userController.UserUpdatePasswordController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserUpdatePasswordController</servlet-name>
+    <url-pattern>/user/update-password</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>ThietBiIndexController</servlet-name>

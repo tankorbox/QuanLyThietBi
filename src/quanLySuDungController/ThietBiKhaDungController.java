@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.ChiTietTTSD;
 import beans.ThietBi;
+import library.LibraryLogin;
 import models.baoduongModel;
 import models.chitietTTSDModels;
 import models.loaithietbiModels;
@@ -43,6 +44,10 @@ public class ThietBiKhaDungController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
 		

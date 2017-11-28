@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import library.LibraryLogin;
 import models.thongtindangkyModels;
 
 /**
@@ -34,6 +35,10 @@ public class HuyDangKyController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		thongtindangkyModels mTTDK = new thongtindangkyModels();
 		int maTTDK = Integer.parseInt(request.getParameter("maTTDK"));
 		

@@ -27,7 +27,7 @@ public class phongbanModels {
 		public ArrayList<PhongBan> getList() {
 			ArrayList<PhongBan> alPB = new ArrayList<PhongBan>();
 			conn = lcdb.GetConnectMySQL();
-			String query = "SELECT * FROM phongban";
+			String query = "SELECT * FROM PhongBan";
 			PhongBan.Builder builder = new PhongBan.Builder();
 			try {
 				st = conn.createStatement();
