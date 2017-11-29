@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import library.LibraryLogin;
+
 /**
  * Servlet implementation class IndexController
  */
@@ -36,9 +38,10 @@ public class IndexController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Random ran = new Random();
-		int number = ran.nextInt(100)+1;
-		request.setAttribute("number", number);
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
+			return;
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 		rd.forward(request, response);
 	}

@@ -4,7 +4,7 @@
 
    <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="<%= request.getContextPath() %>/index">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Trang chủ</span>
           </a>
@@ -41,22 +41,32 @@
           </a>
         </li>
         <%}
-	     if (ndung.getPhanQuyen() > 1){%>
+	     if (ndung.getPhanQuyen() > 1){
+	     if(ndung.getPhanQuyen()==2){%>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="">
           <a class="nav-link" href="<%= request.getContextPath() %>/users">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Quản lý người dùng	</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="">
-            <a class="nav-link" href="<%= request.getContextPath() %>/qlsd-pheduyetdangky">
-            <i class="fa fa-fw fa-dashboard"></i><span> Phê duyệt đăng ký</span>
-            </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="">
-            <a class="nav-link" href="<%= request.getContextPath() %>/qlsd-capnhatsudung">
-            <i class="fa fa-fw fa-dashboard"></i><span> Cập nhật sử dụng</span>
-            </a>
+        <%} %>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#loaiThietBi" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Quản lý sử dụng thiết bị</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="loaiThietBi">
+            <li>
+	              <a class="nav-link" href="<%= request.getContextPath() %>/qlsd-pheduyetdangky">
+	            	  <i class="fa fa-angle-double-right" aria-hidden="true"></i><span> Phê duyệt đăng ký</span>
+	              </a>
+            </li>
+            <li>
+              	<a class="nav-link" href="<%= request.getContextPath() %>/qlsd-capnhatsudung">
+	            	<i class="fa fa-angle-double-right" aria-hidden="true"></i><span> Cập nhật sử dụng</span>
+	            </a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="">
           <a class="nav-link" href="<%= request.getContextPath() %>/thietbi">
