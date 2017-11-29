@@ -90,6 +90,14 @@
     <url-pattern>/user-profile</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>UserPostProfileController</servlet-name>
+    <servlet-class>userController.UserPostProfileController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserPostProfileController</servlet-name>
+    <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>UserNotFoundController</servlet-name>
     <servlet-class>userController.UserNotFoundController</servlet-class>
   </servlet>
@@ -376,5 +384,43 @@
   <servlet-mapping>
     <servlet-name>BaoDuong404Controller</servlet-name>
     <url-pattern>/baoduong/not-found</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  
+  <servlet>
+    <servlet-name>LoaiThietBiMuc1IndexController</servlet-name>
+    <servlet-class>loaithietbi.LoaiThietBiMuc1IndexController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoaiThietBiMuc1IndexController</servlet-name>
+    <url-pattern>/loaithietbimuc1-danhsach</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LoaiThietBiMuc1SuaController</servlet-name>
+    <servlet-class>loaithietbi.LoaiThietBiMuc1SuaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoaiThietBiMuc1SuaController</servlet-name>
+    <url-pattern>/loaithietbimuc1-sua</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LoaiThietBiMuc1ThemController</servlet-name>
+    <servlet-class>loaithietbi.LoaiThietBiMuc1ThemController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoaiThietBiMuc1ThemController</servlet-name>
+    <url-pattern>/loaithietbimuc1-them</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LoaiThietBiMuc2IndexController</servlet-name>
+    <servlet-class>loaithietbi.LoaiThietBiMuc2IndexController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoaiThietBiMuc2IndexController</servlet-name>
+    <url-pattern>/loaithietbimuc2-danhsach</url-pattern>
   </servlet-mapping>
 </web-app>

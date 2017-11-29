@@ -6,19 +6,24 @@
     <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
+      <%if (request.getParameter("msgAdd") != null && request.getParameter("msgAdd").equals("1")){ %>
+		<h3>Thêm thành công</h3>
+		<%} else if(request.getParameter("msgAdd") != null && request.getParameter("msgAdd").equals("0")) { %>
+								<h3>Thêm thất bại</h3>
+							<%} %>
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="#">Thiết bị</a>
         </li>
         <li class="breadcrumb-item active">Thêm thông tin thiết bị</li>
       </ol>
-      <form action="" method="">
+      <form action="<%=request.getContextPath() %>/loaithietbimuc1-them?type=add" id="addLoaiThietBi" method="POST">
           <div class="form-group">
             <div class="form-row">
       
               <div class="col-md-6">
                 <label for="loaiThietBi">Tên loại thiết bị</label>
-                <input class="form-control" type="text" name="loaiThietBi">
+                <input class="form-control" type="text" name="tenLoaiThietBi">
               </div>
             </div>
           </div>

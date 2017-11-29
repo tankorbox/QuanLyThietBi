@@ -1,3 +1,5 @@
+<%@page import="beans.LoaiThietBi"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/partial/header.jsp"%>
@@ -7,12 +9,12 @@
 	<div class="container-fluid">
 		<!-- Breadcrumbs-->
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="#">Thiết bị</a></li>
-			<li class="breadcrumb-item active">Danh sách</li>
+			<li class="breadcrumb-item"><a href="#">Loại thiết bị</a></li>
+			<li class="breadcrumb-item active">Thiết bị mức 1</li>
 		</ol>
 		<div class="col-md-12" style="margin-bottom: 10px ">
 			<div class="col-md-3" style="margin-bottom: 10px">
-				<a href="<%=request.getContextPath()%>/thietbi-them"
+				<a href="<%=request.getContextPath()%>/loaithietbimuc1-them"
 					class="btn btn-success">THÊM DANH MỤC</a> 
 			</div>
 		</div>
@@ -27,21 +29,44 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Máy chiếu</td>
-						<td class="text-center"><a
-							href="<%=request.getContextPath()%>/thietbi-sua"
+				 <% 
+		try{		 
+              ArrayList<LoaiThietBi> alBaoDuongMuc1 = (ArrayList<LoaiThietBi>) request.getAttribute("alLoaiThietBiMuc1");
+		
+              for(LoaiThietBi loaiThietBi : alBaoDuongMuc1) {%>
+                <tr>
+                  <td><%= loaiThietBi.getMaLoai()%></td>
+                  <td><%= loaiThietBi.getTenLoai() %></td>
+                  
+                 <td class="text-center"><a
+							href="<%=request.getContextPath()%>/loaithietbimuc1-sua?maLoaiThietBi=<%=loaiThietBi.getMaLoai()%>"
 							class="btn btn-warning">Sửa</a> <a
-							href="<%=request.getContextPath()%>/thietbi-xoa"
+							href="" onclick="confirmDeleteNews(<%=loaiThietBi.getMaLoai() %>);"
 							class="btn btn-danger">Xóa</a></td>
 
-					</tr>
+                </tr>
+              <% }}catch(Exception e) {
+      			System.out.print(e.getMessage());
+      		} %>
 				</tbody>
 
 			</table>
 		</div>
 	</div>
+	    <script type="text/javascript">
+		function confirmDeleteNews(maLoaiThietBi){
+            var retVal = confirm("Bạn có chắc chắn muốn xóa loại thiết bị này?");
+            if( retVal == true ){
+            	  window.location="<%=request.getContextPath()%>/loaithietbimuc1-sua?maLoaiThietBi=" + maLoaiThietBi;
+               return true;
+            }
+            else{
+               return false;
+            }
+         }
+		
+		
+		</script>
 	<!-- /.container-fluid-->
 	<!-- /.content-wrapper-->
 	<footer class="sticky-footer">

@@ -18,24 +18,12 @@
 			<div class="form-group">
 				<div class="form-row">
 					<div class="col-md-6">
-						<label for="ma">Mã <span style="color: red">(Không cần nhập)</span></label> <input
-							class="form-control" disabled="disabled" type="text" name="matb">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="col-md-6">
-						<label for="ngayNhapThietBi">Ngày nhập thiết bị <span
-							style="color: red">(*)</span></label> <input class="form-control"
-							type="date" name="ngaynhap">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="col-md-6">
 						<label for="tenThietBi">Tên thiết bị<span
 							style="color: red">(*)</span></label> <input class="form-control"
 							type="text" name="tentb">
 					</div>
 				</div>
+				<br>
 				<div class="form-row">
 					<div class="col-md-6">
 						<label for="loaiThietBi">Loại thiết bị <span
@@ -46,6 +34,14 @@
 							<option <%if (loai.getMaLoaiCha()==0) { %> disabled <%} %>value="<%=loai.getMaLoai()%>"><%=loai.getMaLoaiCha()==0? ">>>":""%><%=loai.getTenLoai() %></option>
 							<%} }%>
 						</select>
+					</div>
+				</div>
+				<br>
+				<div class="form-row">
+					<div class="col-md-6">
+						<label for="ngayNhapThietBi">Ngày nhập thiết bị <span
+							style="color: red">(*)</span></label> <input class="form-control"
+							type="date" name="ngaynhap">
 					</div>
 				</div>
 			</div>
