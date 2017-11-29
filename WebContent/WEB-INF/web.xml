@@ -423,4 +423,28 @@
     <servlet-name>LoaiThietBiMuc2IndexController</servlet-name>
     <url-pattern>/loaithietbimuc2-danhsach</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>LoaiThietBiMuc2ThemController</servlet-name>
+    <servlet-class>loaithietbi.LoaiThietBiMuc2ThemController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoaiThietBiMuc2ThemController</servlet-name>
+    <url-pattern>/loaithietbimuc2-them</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>LoaiThietBiMuc2SuaController</servlet-name>
+    <servlet-class>loaithietbi.LoaiThietBiMuc2SuaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoaiThietBiMuc2SuaController</servlet-name>
+    <url-pattern>/loaithietbimuc2-sua</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>LoaiThietBiMuc2ChiTietController</servlet-name>
+    <servlet-class>loaithietbi.LoaiThietBiMuc2ChiTietController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoaiThietBiMuc2ChiTietController</servlet-name>
+    <url-pattern>/loaithietbimuc2-chi-tiet</url-pattern>
+  </servlet-mapping>
 </web-app>

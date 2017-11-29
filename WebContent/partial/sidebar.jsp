@@ -51,11 +51,11 @@
         </li>
         <%} %>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#loaiThietBi" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#sudung" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Quản lý sử dụng thiết bị</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="loaiThietBi">
+          <ul class="sidenav-second-level collapse" id="sudung">
             <li>
 	              <a class="nav-link" href="<%= request.getContextPath() %>/qlsd-pheduyetdangky">
 	            	  <i class="fa fa-angle-double-right" aria-hidden="true"></i><span> Phê duyệt đăng ký</span>

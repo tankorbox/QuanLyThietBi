@@ -31,7 +31,7 @@
           <div class="form-group">
           <div class="form-row">
           	  <div class="col-md-2">
-                <a href="" class="form-control btn btn-danger">HỦY</a>
+                <a href="<%=request.getContextPath() %>/loaithietbimuc1-danhsach" class="form-control btn btn-danger">HỦY</a>
               </div>
           	  <div class="col-md-2">
                 <input class="form-control btn btn-warning" type="reset" name="Reset" value="NHẬP LẠI">

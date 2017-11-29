@@ -8,10 +8,10 @@
     <div class="container-fluid">
     <%LoaiThietBi loaiThietBi = (LoaiThietBi) request.getAttribute("objLoaiThietBiMuc1");%>
     <%if (request.getParameter("msgEdit") != null && request.getParameter("msgEdit").equals("1")){ %>
-		<h3>Sửa thành công</h3>
-		<%} else if(request.getParameter("msgEdit") != null && request.getParameter("msgEdit").equals("0")) { %>
-								<h3>Sửa thất bại</h3>
-							<%} %>
+		<div class="alert alert-success" style="color: black">Sửa thành công!</div>
+	<%} else if(request.getParameter("msgEdit") != null && request.getParameter("msgEdit").equals("0")) { %>
+		<div class="alert alert-danger" style="color: red">Sửa không thành công!</div>
+	<%} %>
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -33,7 +33,7 @@
           <div class="form-group">
           <div class="form-row">
           	  <div class="col-md-2">
-                <a href="" class="form-control btn btn-danger">HỦY</a>
+                <a href="<%=request.getContextPath() %>/loaithietbimuc1-danhsach" class="form-control btn btn-danger">HỦY</a>
               </div>
           	  <div class="col-md-2">
                 <input class="form-control btn btn-warning" type="reset" name="Reset" value="NHẬP LẠI">

@@ -53,6 +53,7 @@ public class LoginPostController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/login?msg=0");
 		}else{
 			HttpSession session = request.getSession();
+			session.setMaxInactiveInterval(86400);
 			session.setAttribute("nguoidung", nguoidung);
 			response.sendRedirect(request.getContextPath()+"/index");
 		}

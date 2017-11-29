@@ -14,6 +14,18 @@
 			<li class="breadcrumb-item"><a href="#">Loại thiết bị</a></li>
 			<li class="breadcrumb-item active">Thiết bị mức 2</li>
 		</ol>
+		<%
+		if(request.getParameter("notfound") != null){
+		%>
+		<div class="alert alert-danger" style="color: red">Không tìm thấy!</div>
+		<%}
+      if (request.getParameter("add") != null && request.getParameter("add").equals("1")) {%>
+		<div class="alert alert-success" style="color: black">Thêm thành công!</div>
+  <%}
+      if (request.getParameter("add") != null && request.getParameter("add").equals("0")) {%>
+		<div class="alert alert-danger" style="color: red">Thêm không thành công!</div>
+<%}
+      %>
       <div class="col-md-12" style="margin-bottom: 10px">
       	<div class="col-md-6" style="margin-bottom: 10px">
       			<a href="<%=request.getContextPath()%>/loaithietbimuc2-them" class="btn btn-success">THÊM THIẾT BỊ</a>
@@ -45,13 +57,13 @@
 	                  <td><%= loaiThietBiMuc1.getTenLoai() %></td>
 	                  <td><%= loaiThietBi.getSoLuong() %></td>
 	                <td class="text-center">
-          			<a href="<%= request.getContextPath() %>/thietbi-sua" class="btn btn-warning">Sửa</a>
+          			<a href="<%=request.getContextPath()%>/loaithietbimuc2-sua?maloaithietbi=<%=loaiThietBi.getMaLoai() %>" class="btn btn-warning">Sửa</a>
                   </td>
                   <td class="text-center">
           			<a href="<%= request.getContextPath() %>/thietbi-xoa" class="btn btn-danger">Xóa</a>
                   </td>
                   <td class="text-center">
-          			<a href="<%= request.getContextPath() %>/thietbi-chitiet" class="btn btn-success">Chi tiết</a>
+          			<a href="<%= request.getContextPath() %>/loaithietbimuc2-chi-tiet?maloaithietbi=<%=loaiThietBi.getMaLoai() %>" class="btn btn-success">Chi tiết</a>
                   </td>
 	                </tr>
 	              <% 

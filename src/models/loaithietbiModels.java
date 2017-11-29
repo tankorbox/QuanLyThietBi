@@ -167,7 +167,8 @@ public class loaithietbiModels {
 				if (rs.getInt("MaLoai") == maLoai) { // Doi tuong con
 					loaiTB = builder.setMaLoai(rs.getInt("MaLoai"))
 							.setTenLoai(rs.getString("TenLoai"))
-							.setMaLoaiCha(rs.getInt("MaLoaiCha")).build();
+							.setMaLoaiCha(rs.getInt("MaLoaiCha"))
+							.setSoLuong(rs.getInt("SoLuong")).build();
 				} else { // Doi tuong cha
 					loaiCha = builder.setMaLoai(rs.getInt("MaLoai"))
 							.setTenLoai(rs.getString("TenLoai"))
@@ -236,6 +237,55 @@ public class loaithietbiModels {
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	public int addLoaiThietBiMuc2(LoaiThietBi loaiThietBi) {
+		conn = lcdb.GetConnectMySQL();
+		int result = 0;
+		String query = "INSERT INTO LoaiTB(TenLoai,MaLoaiCha,SoLuong) VALUES (?,?,?)";
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setString(1, loaiThietBi.getTenLoai());
+			pst.setInt(2, loaiThietBi.getMaLoaiCha());
+			pst.setInt(3, loaiThietBi.getSoLuong());
+			pst.executeUpdate();
+			result = 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pst.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	public int editLoaiThietBiMuc2(LoaiThietBi loaiThietBi) {
+		conn = lcdb.GetConnectMySQL();
+		int result = 0;
+		String query = "UPDATE LoaiTB TenLoai=?,MaLoaiCha=?,SoLuong=? WHERE MaLoai=?";
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setString(1, loaiThietBi.getTenLoai());
+			pst.setInt(2, loaiThietBi.getMaLoaiCha());
+			pst.setInt(3, loaiThietBi.getSoLuong());
+			pst.setInt(4, loaiThietBi.getMaLoai());
+			pst.executeUpdate();
+			result = 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pst.close();
+				conn.close();
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}

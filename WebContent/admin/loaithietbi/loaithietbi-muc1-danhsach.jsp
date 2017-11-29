@@ -12,6 +12,11 @@
 			<li class="breadcrumb-item"><a href="#">Loại thiết bị</a></li>
 			<li class="breadcrumb-item active">Thiết bị mức 1</li>
 		</ol>
+		<%
+		if(request.getParameter("notfound") != null){
+		%>
+		<div class="alert alert-danger" style="color: red">Không tìm thấy!</div>
+		<%} %>
 		<div class="col-md-12" style="margin-bottom: 10px ">
 			<div class="col-md-3" style="margin-bottom: 10px">
 				<a href="<%=request.getContextPath()%>/loaithietbimuc1-them"
