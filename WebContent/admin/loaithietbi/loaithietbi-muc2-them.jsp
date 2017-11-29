@@ -15,12 +15,15 @@
       <form action="" method="">
          <div class="form-group">
             <div class="form-row">
-              <div class="col-md-6">
-                <label for="maSoSeri">Mã</label>
-                <input class="form-control" type="text" name="ma">
+            <div class="col-md-6">
+                <label for="loaiThietBi">Loại thiết bị</label>
+              	<select class="form-control" name="loaiThietBi">
+              	<option>Màn hình</option>
+              	<option>Máy chiếu</option>
+              	</select>
               </div>
                <div class="col-md-6">
-                <label for="tenThietBi">Tên thiết bị<span style="color:red">(*)</span></label>
+                <label for="tenThietBi">Tên hãng<span style="color:red">(*)</span><span style="color:green"> (vd: LG, Sony, .vv..)</span></label>
                 <input class="form-control" type="text" name="tenThietBi">
               </div>
             </div>
@@ -31,13 +34,7 @@
                 <label for="soLuong">Số lượng</label>
                 <input class="form-control" type="number" name="soLuong">
               </div>
-              <div class="col-md-6">
-                <label for="loaiThietBi">Loại thiết bị</label>
-              	<select class="form-control" name="loaiThietBi">
-              	<option>Màn hình</option>
-              	<option>Máy chiếu</option>
-              	</select>
-              </div>
+              
             </div>
           </div>      
           <div class="form-group">

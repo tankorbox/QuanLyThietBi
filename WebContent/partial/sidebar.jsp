@@ -70,6 +70,20 @@
             <span class="nav-link-text">Quản lý bảo dưỡng</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#loaiThietBi" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Quản lý loại thiết bị</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="loaiThietBi">
+            <li>
+              <a href="<%= request.getContextPath() %>/loaithietbimuc1-danhsach"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Thiết bị mức 1</a>
+            </li>
+            <li>
+              <a href="<%= request.getContextPath() %>/loaithietbimuc2-danhsach"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Thiết bị mức 2</a>
+            </li>
+          </ul>
+        </li>
         <%} %>
       </ul>
       <ul class="navbar-nav sidenav-toggler">

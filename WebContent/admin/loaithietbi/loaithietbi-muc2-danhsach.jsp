@@ -1,3 +1,7 @@
+<%@page import="beans.LoaiThietBi"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@include file="/partial/header.jsp" %>
@@ -7,14 +11,12 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">Thiết bị</a>
-        </li>
-        <li class="breadcrumb-item active">Danh sách</li>
-      </ol>
+			<li class="breadcrumb-item"><a href="#">Loại thiết bị</a></li>
+			<li class="breadcrumb-item active">Thiết bị mức 2</li>
+		</ol>
       <div class="col-md-12" style="margin-bottom: 10px">
       	<div class="col-md-6" style="margin-bottom: 10px">
-      		<a href="<%=request.getContextPath() %>/thietbi-them" class="btn btn-success">THÊM THIẾT BỊ</a>
+      			<a href="<%=request.getContextPath()%>/loaithietbimuc2-them" class="btn btn-success">THÊM THIẾT BỊ</a>
       	</div>
       </div>
   
@@ -30,12 +32,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Máy chiếu</td>
-                  <td>Canon Projecter</td>
-                  <td>5</td>
-                  <td class="text-center">
+             		 <% 
+		try{		 
+              Map<LoaiThietBi,List<LoaiThietBi>> mapThietBiMuc2 = (HashMap<LoaiThietBi,List<LoaiThietBi>>) request.getAttribute("mapLoaiThietBiMuc2");
+              for(Map.Entry<LoaiThietBi, List<LoaiThietBi>> entry : mapThietBiMuc2.entrySet()) {
+            	  LoaiThietBi loaiThietBiMuc1 = entry.getKey();
+            	  List<LoaiThietBi> loaiThietBiMuc2s = entry.getValue();
+					for(LoaiThietBi loaiThietBi : loaiThietBiMuc2s) {%>
+	                <tr>
+	                  <td><%= loaiThietBi.getMaLoai()%></td>
+	                  <td><%= loaiThietBiMuc1.getTenLoai() %> <%= loaiThietBi.getTenLoai() %></td>
+	                  <td><%= loaiThietBiMuc1.getTenLoai() %></td>
+	                  <td><%= loaiThietBi.getSoLuong() %></td>
+	                <td class="text-center">
           			<a href="<%= request.getContextPath() %>/thietbi-sua" class="btn btn-warning">Sửa</a>
                   </td>
                   <td class="text-center">
@@ -44,7 +53,14 @@
                   <td class="text-center">
           			<a href="<%= request.getContextPath() %>/thietbi-chitiet" class="btn btn-success">Chi tiết</a>
                   </td>
-                </tr>
+	                </tr>
+	              <% 
+						
+					}
+            	}
+              }catch(Exception e) {
+      			System.out.print(e.getMessage());
+      		} %>
               </tbody>
             </table>
           </div>
