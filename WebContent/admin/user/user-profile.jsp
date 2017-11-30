@@ -20,6 +20,9 @@
 	  {%>
 		<div class="alert alert-danger" style="color: red">Cập nhật thông tin không thành công!</div>
 	  <%}%>
+	  <a href="<%= request.getContextPath()%>/change-password" class="btn btn-primary">
+	  <i class="fa fa-repeat" aria-hidden="true"></i> Đổi mật khẩu
+	  </a>
       <form method="post" action="<%=request.getContextPath() %>/profile">
           <div class="form-group">
             <div class="form-row">

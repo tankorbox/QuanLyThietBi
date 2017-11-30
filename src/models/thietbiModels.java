@@ -336,7 +336,13 @@ public class thietbiModels {
 					rs = st.executeQuery(query);
 					while(rs.next()){
 						
-						ThietBi thietbi = builder.setMaTB(rs.getInt("MaTB")).setTenTB(rs.getString("TenTB")).setMaLoaiTB(rs.getInt("MaLoaiTB")).setNgayNhap(rs.getDate("NgayNhap")).build();
+						ThietBi thietbi = builder
+								.setMaTB(rs.getInt("MaTB"))
+								.setTenTB(rs.getString("TenTB"))
+								.setMaLoaiTB(rs.getInt("MaLoaiTB"))
+								.setNgayNhap(rs.getDate("NgayNhap"))
+								.setIsBlocked(rs.getBoolean("isBlocked"))
+								.build();
 						alTB.add(thietbi);
 					}
 				} catch (SQLException e) {
