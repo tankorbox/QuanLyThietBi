@@ -6,13 +6,14 @@ public class LoaiThietBi {
 	private int maLoaiCha;
 	private int soLuong;
 	private LoaiThietBi objLoaiCha;
-	
+	private boolean isBlocked;
 	private LoaiThietBi(Builder builder) {
 		maLoai = builder.maLoai;
 		tenLoai = builder.tenLoai;
 		maLoaiCha = builder.maLoaiCha;
 		soLuong = builder.soLuong;
 		objLoaiCha = builder.objLoaiCha;
+		isBlocked = builder.isBlocked;
 	}
 	
 	public static class Builder {
@@ -21,7 +22,7 @@ public class LoaiThietBi {
 		private int maLoaiCha;
 		private int soLuong;
 		private LoaiThietBi objLoaiCha;
-		
+		private boolean isBlocked;
 		public Builder() {
 			
 		}
@@ -54,6 +55,12 @@ public class LoaiThietBi {
 			this.objLoaiCha = objLoaiCha;
 			return this;
 		}
+
+		public Builder setBlocked(boolean isBlocked) {
+			this.isBlocked = isBlocked;
+			return this;
+		}
+		
 	}
 	
 	
@@ -114,6 +121,18 @@ public class LoaiThietBi {
 
 	public void setObjLoaiCha(LoaiThietBi objLoaiCha) {
 		this.objLoaiCha = objLoaiCha;
+	}
+
+
+
+	public boolean isBlocked() {
+		return isBlocked;
+	}
+
+
+
+	public void setBlocked(boolean isBlocked) {
+		this.isBlocked = isBlocked;
 	}
 
 
