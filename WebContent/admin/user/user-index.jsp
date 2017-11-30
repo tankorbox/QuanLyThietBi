@@ -65,7 +65,7 @@
                   <td>
           			<a href="<%= request.getContextPath() %>/user-edit?id=<%=nd.getMaND() %>" class="btn btn-success">Sửa</a>
           			<a href="<%= request.getContextPath() %>/user-block?id=<%=nd.getMaND() %>">
-          			<%if(nd.isBlocked()) {%>
+          			<%if(!nd.isBlocked()) {%>
           			<span class="btn btn-danger">Khóa</span>
           			<%}else{ %>
           			<span class="btn btn-warning">Mở khóa</span>

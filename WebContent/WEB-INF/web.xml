@@ -178,6 +178,17 @@
     <url-pattern>/thietbi-chitiet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ThietBiBlockController</servlet-name>
+    <servlet-class>thietBiController.ThietBiBlockController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ThietBiBlockController</servlet-name>
+    <url-pattern>/thietbi-block</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  <servlet>
     <servlet-name>sdtbIndexController</servlet-name>
     <servlet-class>sdtbController.sdtbIndexController</servlet-class>
   </servlet>
@@ -422,6 +433,14 @@
     <servlet-name>LoaiThietBiMuc1ThemController</servlet-name>
     <url-pattern>/loaithietbimuc1-them</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>LoaiThietBiMuc1BlockController</servlet-name>
+    <servlet-class>loaithietbi.LoaiThietBiMuc1BlockController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoaiThietBiMuc1BlockController</servlet-name>
+    <url-pattern>/loaithietbimuc1-block</url-pattern>
+  </servlet-mapping>
   
   <servlet>
     <servlet-name>LoaiThietBiMuc2IndexController</servlet-name>
@@ -454,5 +473,13 @@
   <servlet-mapping>
     <servlet-name>LoaiThietBiMuc2ChiTietController</servlet-name>
     <url-pattern>/loaithietbimuc2-chi-tiet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LoaiThietBiMuc2BlockController</servlet-name>
+    <servlet-class>loaithietbi.LoaiThietBiMuc2BlockController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoaiThietBiMuc2BlockController</servlet-name>
+    <url-pattern>/loaithietbimuc2-block</url-pattern>
   </servlet-mapping>
 </web-app>

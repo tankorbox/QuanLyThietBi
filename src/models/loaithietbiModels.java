@@ -70,7 +70,9 @@ public class loaithietbiModels {
 				LoaiThietBi loaiTB = builder.setMaLoai(rs.getInt("MaLoai"))
 						.setTenLoai(rs.getString("TenLoai"))
 						.setMaLoaiCha(rs.getInt("MaLoaiCha"))
-						.setSoLuong(rs.getInt("SoLuong")).build();
+						.setSoLuong(rs.getInt("SoLuong"))
+						.setBlocked(rs.getBoolean("isBlocked"))
+						.build();
 				alLoaiTB.add(loaiTB);
 			}
 		} catch (SQLException e) {
@@ -100,7 +102,9 @@ public class loaithietbiModels {
 				LoaiThietBi loaiTB = builder.setMaLoai(rs.getInt("MaLoai"))
 						.setTenLoai(rs.getString("TenLoai"))
 						.setMaLoaiCha(rs.getInt("MaLoaiCha"))
-						.setSoLuong(rs.getInt("SoLuong")).build();
+						.setSoLuong(rs.getInt("SoLuong"))
+						.setBlocked(rs.getBoolean("isBlocked"))
+						.build();
 				alLoaiTB.add(loaiTB);
 			}
 		} catch (SQLException e) {
@@ -168,11 +172,15 @@ public class loaithietbiModels {
 					loaiTB = builder.setMaLoai(rs.getInt("MaLoai"))
 							.setTenLoai(rs.getString("TenLoai"))
 							.setMaLoaiCha(rs.getInt("MaLoaiCha"))
-							.setSoLuong(rs.getInt("SoLuong")).build();
+							.setSoLuong(rs.getInt("SoLuong"))
+							.setBlocked(rs.getBoolean("isBlocked"))
+							.build();
 				} else { // Doi tuong cha
 					loaiCha = builder.setMaLoai(rs.getInt("MaLoai"))
 							.setTenLoai(rs.getString("TenLoai"))
-							.setMaLoaiCha(rs.getInt("MaLoaiCha")).build();
+							.setMaLoaiCha(rs.getInt("MaLoaiCha"))
+							.setBlocked(rs.getBoolean("isBlocked"))
+							.build();
 				}
 			}
 			loaiTB.setObjLoaiCha(loaiCha);
@@ -277,6 +285,29 @@ public class loaithietbiModels {
 			pst.setInt(2, loaiThietBi.getMaLoaiCha());
 			pst.setInt(3, loaiThietBi.getSoLuong());
 			pst.setInt(4, loaiThietBi.getMaLoai());
+			pst.executeUpdate();
+			result = 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pst.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	public int blockLTB(LoaiThietBi loaiThietBi, int i) {
+		conn = lcdb.GetConnectMySQL();
+		int result = 0;
+		String query = "UPDATE LoaiTB SET isBlocked = ? WHERE MaLoai = ?";
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setBoolean(1, !loaiThietBi.isBlocked());
+			pst.setInt(2, loaiThietBi.getMaLoai());
 			pst.executeUpdate();
 			result = 1;
 		} catch (SQLException e) {
