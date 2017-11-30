@@ -45,6 +45,7 @@ public class userModels {
 						.setPhongBan(rs.getInt("PhongBan"))
 						.setTenDangNhap(rs.getString("TenDangNhap"))
 						.setTenND(rs.getString("TenND"))
+						.setBlocked(rs.getBoolean("isBlocked"))
 						.build();
 				alND.add(nguoidung);
 			}
@@ -106,6 +107,7 @@ public class userModels {
 						.setPhongBan(rs.getInt("PhongBan"))
 						.setTenDangNhap(rs.getString("TenDangNhap"))
 						.setTenND(rs.getString("TenND"))
+						.setBlocked(rs.getBoolean("isBlocked"))
 						.build();
 			}
 		} catch (SQLException e) {
@@ -253,6 +255,7 @@ public class userModels {
 						.setPhongBan(rs.getInt("PhongBan"))
 						.setTenDangNhap(rs.getString("TenDangNhap"))
 						.setTenND(rs.getString("TenND"))
+						.setBlocked(rs.getBoolean("isBlocked"))
 						.build();
 			}
 		} catch (SQLException e) {
@@ -269,5 +272,28 @@ public class userModels {
 			}
 		}
 		return nguoidung;
+	}
+
+	public int blockUser(NguoiDung ngEdit) {
+		int result = 0;
+		conn = lcdb.GetConnectMySQL();
+		String sql = "UPDATE NguoiDung SET isBlocked=? WHERE MaND=?";
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setBoolean(1, ngEdit.isBlocked());
+			pst.setInt(2, ngEdit.getMaND());
+			pst.executeUpdate();
+			result = 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pst.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 }
