@@ -37,7 +37,8 @@ public class loaithietbiModels {
 			st = conn.createStatement();
 			rs = st.executeQuery(query);
 			while (rs.next()) {
-				LoaiThietBi loaiTB = builder.setMaLoai(rs.getInt("MaLoai"))
+				LoaiThietBi loaiTB = builder
+						.setMaLoai(rs.getInt("MaLoai"))
 						.setTenLoai(rs.getString("TenLoai"))
 						.setMaLoaiCha(rs.getInt("MaLoaiCha"))
 						.setSoLuong(rs.getInt("SoLuong"))

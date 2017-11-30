@@ -40,8 +40,17 @@
 		                  		<td><%=loaiCha.getTenLoai() %></td>
 		                  	<%break; } %>
 		                  <%} %>
+		                  <td>
+		                  <%if(item.isBlocked()){%>
+		                  <span style="color:red">Đang tạm khóa</span>
+		                  <%}else{ %>
+		                  <span style="color:blue">Khả dụng</span>
+		                  <%} %>
+		                  </td>
 		                  <td class="text-center">
+		                  <%if(!item.isBlocked()){%>
 		          			<a href="<%= request.getContextPath() %>/cnnm-dangkysudung?type=load&maLoaiTB=<%=item.getMaLoai()%>" class="btn btn-success">Đăng ký</a>
+		          			<%} %>
 		                  </td>
 		                </tr>
 	                <%} else {
