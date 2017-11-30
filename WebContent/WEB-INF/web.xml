@@ -128,7 +128,26 @@
   <servlet-mapping>
     <servlet-name>UserBlockController</servlet-name>
     <url-pattern>/user-block</url-pattern>
+  </servlet-mapping>  
+   <servlet>
+    <servlet-name>UserChangePasswordController</servlet-name>
+    <servlet-class>userController.UserChangePasswordController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserChangePasswordController</servlet-name>
+    <url-pattern>/change-password</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>UserPostChangePasswordController</servlet-name>
+    <servlet-class>userController.UserPostChangePasswordController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserPostChangePasswordController</servlet-name>
+    <url-pattern>/update-password</url-pattern>
+  </servlet-mapping>
+  
+  
+  
   <servlet>
     <servlet-name>ThietBiIndexController</servlet-name>
     <servlet-class>thietBiController.ThietBiIndexController</servlet-class>

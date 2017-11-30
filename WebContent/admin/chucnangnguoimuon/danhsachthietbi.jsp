@@ -24,6 +24,7 @@
                   <th class="text-center" width="50px">#</th>
                   <th>Tên thiết bị</th>
                   <th>Loại thiết bị</th>
+                  <th>Trạng thái</th>
                   <th class="text-center" width="100px">Chức năng</th>
                 </tr>
               </thead>

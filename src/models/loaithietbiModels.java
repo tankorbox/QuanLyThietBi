@@ -40,7 +40,9 @@ public class loaithietbiModels {
 				LoaiThietBi loaiTB = builder.setMaLoai(rs.getInt("MaLoai"))
 						.setTenLoai(rs.getString("TenLoai"))
 						.setMaLoaiCha(rs.getInt("MaLoaiCha"))
-						.setSoLuong(rs.getInt("SoLuong")).build();
+						.setSoLuong(rs.getInt("SoLuong"))
+						.setBlocked(rs.getBoolean("isBlocked"))
+						.build();
 				alLoaiTB.add(loaiTB);
 			}
 		} catch (SQLException e) {

@@ -23,13 +23,13 @@
   		ArrayList<ThietBi> alThietBi = (ArrayList<ThietBi>) request.getAttribute("alThietBi");
   		%>
       <div class="table-responsive">
-            <table class="table table-striped" width="100%" cellspacing="0">
+            <table class="table table-striped" width="100%" cellspacing="0" id="dataTable">
               <thead>
                 <tr>
-                  <th>Mã</th>
+                  <th>Mã thiết bị</th>
                   <th>Tên thiết bị</th>
                   <th>Tình trạng</th>
-                  <th class="text-center">Thông tin</th>
+                  <th>Thông tin</th>
                 </tr>
               </thead>
               <tbody>
@@ -39,8 +39,14 @@
                 <tr>
                   <td><%= thietBi.getMaTB() %></td>
                   <td><%= thietBi.getTenTB() %></td>
-                  <td>Đang sử dụng</td>
-                  <td class="text-center">
+                  <td>
+                  <% if(thietBi.isBlocked()){ %>
+                  	<span style="color:red">Đang tạm khóa</span>
+                  <%}else{%>
+                  	<span style="color:blue">Khả dụng</span>	
+                  <%} %>
+                  </td>
+                  <td>
           			<a href="<%= request.getContextPath() %>/thietbi-chitiet?maTB=<%= thietBi.getMaTB() %>" class="btn btn-success">Chi tiết</a>
           			<a href="<%= request.getContextPath() %>/baoduong-dangky?maTB=<%= thietBi.getMaTB() %>" class="btn btn-warning">Đăng ký bảo dưỡng</a>
                   </td>
