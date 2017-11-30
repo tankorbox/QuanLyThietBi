@@ -122,6 +122,14 @@
     <url-pattern>/user/update-password</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>UserBlockController</servlet-name>
+    <servlet-class>userController.UserBlockController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserBlockController</servlet-name>
+    <url-pattern>/user-block</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>ThietBiIndexController</servlet-name>
     <servlet-class>thietBiController.ThietBiIndexController</servlet-class>
   </servlet>

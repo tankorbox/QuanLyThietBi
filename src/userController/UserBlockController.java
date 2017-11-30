@@ -1,6 +1,7 @@
 package userController;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
@@ -12,19 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.NguoiDung;
-import library.LibraryMD5;
+import library.LibraryLogin;
 import models.userModels;
 
 /**
  * Servlet implementation class IndexController
  */
-public class LoginPostController extends HttpServlet {
+public class UserBlockController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginPostController() {
+    public UserBlockController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,27 +42,31 @@ public class LoginPostController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String tendangnhap = request.getParameter("tendangnhap");
-		String matkhau = request.getParameter("matkhau");
-		System.out.println(tendangnhap);
-		System.out.println(matkhau);
-		LibraryMD5 md5 = new LibraryMD5();
-		matkhau = md5.GetStringMD5(matkhau);
-		userModels mUser = new userModels();
-		NguoiDung nguoidung = mUser.getUserLogin(tendangnhap,matkhau);
-		if(nguoidung==null){
-			response.sendRedirect(request.getContextPath()+"/login?msg=0");
+		LibraryLogin mLogin = new LibraryLogin();
+		if(!mLogin.Login(request,response)){
 			return;
-		}else{
-			if(nguoidung.isBlocked()) {
-				response.sendRedirect(request.getContextPath()+"/login?msg=block");
-				return;
-			}
-			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(86400);
-			session.setAttribute("nguoidung", nguoidung);
-			response.sendRedirect(request.getContextPath()+"/index");
 		}
+		HttpSession session = request.getSession();
+		NguoiDung objUser = (NguoiDung)session.getAttribute("nguoidung");
+		if(objUser.getPhanQuyen() == 1) {
+			response.sendRedirect(request.getContextPath()+"/index");
+			return;
+		}
+		int id = Integer.parseInt(request.getParameter("id"));
+		userModels uModel = new userModels();
+		NguoiDung nd = uModel.getById(id);
+		if(nd == null ) {
+			response.sendRedirect(request.getContextPath()+"/user-notfound");
+			return;
+		}
+		NguoiDung.Builder ngBuilder = new NguoiDung.Builder();
+		NguoiDung ngEdit = ngBuilder
+							.setMaND(nd.getMaND())
+							.setBlocked(!nd.isBlocked())
+							.build();
+		int updateUser = uModel.blockUser(ngEdit);
+		response.sendRedirect(request.getContextPath()+"/users?block="+updateUser);
+		return;
 	}
 
 }
