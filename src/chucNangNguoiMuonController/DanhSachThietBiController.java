@@ -1,6 +1,7 @@
 package chucNangNguoiMuonController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.LoaiThietBi;
 import library.LibraryLogin;
 import models.loaithietbiModels;
 import models.thietbiModels;
@@ -42,7 +44,15 @@ public class DanhSachThietBiController extends HttpServlet {
 			return;
 		}
 		loaithietbiModels mLoaiThietBi = new loaithietbiModels();
-		request.setAttribute("alLoaiThietBi", mLoaiThietBi.getList());
+		ArrayList<LoaiThietBi> alTB2 = mLoaiThietBi.getList();
+		for (LoaiThietBi loaiThietBi : alTB2) {
+			if(loaiThietBi.getMaLoaiCha() != 0) {
+				LoaiThietBi tb1 = mLoaiThietBi.getThietBiMuc1(loaiThietBi.getMaLoaiCha());
+				System.out.println(tb1.toString());
+				loaiThietBi.setObjLoaiCha(tb1);
+			}
+		}
+		request.setAttribute("alLoaiThietBi", alTB2);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/admin/chucnangnguoimuon/danhsachthietbi.jsp");
 		rd.forward(request, response);

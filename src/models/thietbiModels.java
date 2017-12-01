@@ -62,7 +62,7 @@ public class thietbiModels {
 				ArrayList<ThietBi> alThietBi = new ArrayList<ThietBi>();
 				conn = lcdb.GetConnectMySQL();
 				String query = "SELECT * FROM ThietBi \n" + 
-						"WHERE ThietBi.MaLoaiTB = ? AND ThietBi.MaTB NOT IN \n" + 
+						"WHERE ThietBi.MaLoaiTB = ? AND isBlocked = 0 AND ThietBi.MaTB NOT IN \n" + 
 						"	(SELECT ChiTietTTSD.MaTB FROM ChiTietTTSD \n" + 
 						" 	INNER JOIN ThongTinSuDung on ThongTinSuDung.MaTTSD = ChiTietTTSD.MaTTSD\n" + 
 						" 	WHERE ThongTinSuDung.TinhTrang = 2)\n" + 
@@ -329,7 +329,7 @@ public class thietbiModels {
 			public ArrayList<ThietBi> getListDangKy() {
 				ArrayList<ThietBi> alTB = new ArrayList<ThietBi>();
 				conn = lcdb.GetConnectMySQL();
-				String query = "SELECT * FROM ThietBi tb WHERE tb.MaTB NOT IN (SELECT MaTB FROM ThongTinBaoDuong WHERE TinhTrang <> 3)";
+				String query = "SELECT * FROM ThietBi tb WHERE tb.MaTB NOT IN (SELECT MaTB FROM ThongTinBaoDuong WHERE TinhTrang <> 3) AND tb.isBlocked=0";
 				ThietBi.Builder builder = new ThietBi.Builder();
 				try {
 					st = conn.createStatement();
