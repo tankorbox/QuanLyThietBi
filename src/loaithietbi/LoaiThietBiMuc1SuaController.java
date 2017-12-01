@@ -62,7 +62,6 @@ public class LoaiThietBiMuc1SuaController extends HttpServlet {
 			LoaiThietBi loaiThietBi = mLoaithietbiModel.getItemByMaLoai(maLoaiThietBi);
 			if(request.getParameter("type") != null){ //click button edit
 				String tenLoaiThietBi = new String(request.getParameter("tenLoaiThietBi").getBytes("ISO-8859-1"), "UTF-8");
-				System.out.println(tenLoaiThietBi +" hehe");
 				loaiThietBi.setTenLoai(tenLoaiThietBi);
 				if(mLoaithietbiModel.updateTenMaLoaiMuc1(loaiThietBi)>0) {
 					response.sendRedirect(request.getContextPath()+"/loaithietbimuc1-sua?msgEdit=1&maLoaiThietBi=" + maLoaiThietBi);
@@ -71,7 +70,6 @@ public class LoaiThietBiMuc1SuaController extends HttpServlet {
 					response.sendRedirect(request.getContextPath()+"/loaithietbimuc1-sua?msgEdit=0&maLoaiThietBi=" + maLoaiThietBi);
 					return;
 				}
-				
 			}else{
 				request.setAttribute("objLoaiThietBiMuc1", loaiThietBi);
 				RequestDispatcher rd = request.getRequestDispatcher("/admin/loaithietbi/loaithietbi-muc1-sua.jsp");

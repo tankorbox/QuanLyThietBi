@@ -57,7 +57,6 @@ public class LoaiThietBiMuc1ThemController extends HttpServlet {
 		
 		
 		if (request.getParameter("type")!=null){
-			System.out.println("begin add");
 			loaithietbiModels mLoaithietbiModel = new loaithietbiModels();
 			String tenLoaiThietBi = new String(request.getParameter("tenLoaiThietBi").getBytes("ISO-8859-1"), "UTF-8");
 			LoaiThietBi.Builder builder = new LoaiThietBi.Builder();

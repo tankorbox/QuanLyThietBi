@@ -53,11 +53,7 @@
 					%>
 					<tr>
 						<td class="text-center"><%=objTTDK.getMaTTDK()%></td>
-<<<<<<< HEAD
-						<td><%= objTTDK.getObjNguoiDung().getTenND() %></td>
-=======
 						<td><%=objTTDK.getObjNguoiDung().getTenND() %></td>
->>>>>>> ec9b15cc8ff95fdfac853efb71e37f021537a109
 						<td><%=objTTDK.getObjLoaiTB().getTenLoai()%></td>
 						<td><%=objTTDK.getObjLoaiTB().getObjLoaiCha().getTenLoai()%></td>
 						<td class="text-center"><%=objTTDK.getSoLuongDK()%></td>
@@ -210,7 +206,7 @@
 							<div class="form-row">
 								<div class="col-md-12">
 									<input type="hidden" name="maTTDK" value="" id="modal-maTTDK">
-									<textarea class="form-control" rows="5" name="thongBao"></textarea>
+									<textarea class="form-control" rows="5" name="thongBao" required></textarea>
 								</div>
 							</div>
 						</div>

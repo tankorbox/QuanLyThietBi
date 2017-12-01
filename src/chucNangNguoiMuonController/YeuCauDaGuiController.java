@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import beans.NguoiDung;
 import beans.ThongTinDangKy;
 import library.LibraryLogin;
 import models.loaithietbiModels;
@@ -47,7 +49,9 @@ public class YeuCauDaGuiController extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
 		
-		int maND = 4;
+		HttpSession session = request.getSession();
+		NguoiDung nguoidung = (NguoiDung) session.getAttribute("nguoidung");
+		int maND = nguoidung.getMaND();
 		
 		//Lay danh sach TTDK
 		thongtindangkyModels mTTDK = new thongtindangkyModels();

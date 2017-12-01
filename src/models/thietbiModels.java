@@ -18,7 +18,7 @@ public class thietbiModels {
 	private Statement st;
 	private PreparedStatement pst;
 	private ResultSet rs;
-
+	
 	public thietbiModels() {
 		this.lcdb = new LibraryConnectDB();
 		this.conn = null;
@@ -28,14 +28,19 @@ public class thietbiModels {
 	public ArrayList<ThietBi> getList() {
 		ArrayList<ThietBi> alTB = new ArrayList<ThietBi>();
 		conn = lcdb.GetConnectMySQL();
-		String query = "SELECT * FROM ThietBi";
+		String query = "SELECT * FROM ThietBi WHERE isBlocked=0";
 		ThietBi.Builder builder = new ThietBi.Builder();
 		try {
 			st = conn.createStatement();
 			rs = st.executeQuery(query);
 			while (rs.next()) {
-				ThietBi thietbi = builder.setMaTB(rs.getInt("MaTB")).setTenTB(rs.getString("TenTB"))
-						.setMaLoaiTB(rs.getInt("MaLoaiTB")).setNgayNhap(rs.getDate("NgayNhap")).build();
+				ThietBi thietbi = builder
+						.setMaTB(rs.getInt("MaTB"))
+						.setTenTB(rs.getString("TenTB"))
+						.setMaLoaiTB(rs.getInt("MaLoaiTB"))
+						.setNgayNhap(rs.getDate("NgayNhap"))
+						.setIsBlocked(rs.getBoolean("isBlocked"))
+						.build();
 				alTB.add(thietbi);
 			}
 		} catch (SQLException e) {
@@ -57,7 +62,7 @@ public class thietbiModels {
 				ArrayList<ThietBi> alThietBi = new ArrayList<ThietBi>();
 				conn = lcdb.GetConnectMySQL();
 				String query = "SELECT * FROM ThietBi \n" + 
-						"WHERE ThietBi.MaLoaiTB = ? AND ThietBi.MaTB NOT IN \n" + 
+						"WHERE ThietBi.MaLoaiTB = ? AND isBlocked = 0 AND ThietBi.MaTB NOT IN \n" + 
 						"	(SELECT ChiTietTTSD.MaTB FROM ChiTietTTSD \n" + 
 						" 	INNER JOIN ThongTinSuDung on ThongTinSuDung.MaTTSD = ChiTietTTSD.MaTTSD\n" + 
 						" 	WHERE ThongTinSuDung.TinhTrang = 2)\n" + 
@@ -235,12 +240,14 @@ public class thietbiModels {
 				String TenTB = rs.getString("TenTB");
 				int MaLoaiTB = rs.getInt("MaLoaiTB");
 				Date NgayNhap = rs.getDate("NgayNhap");
-
+				boolean isBlocked = rs.getBoolean("isBlocked");
+				
 				ThietBi.Builder tbBuilder = new ThietBi.Builder();
 				tbBuilder.setMaTB(MaTB);
 				tbBuilder.setTenTB(TenTB);
 				tbBuilder.setMaLoaiTB(MaLoaiTB);
 				tbBuilder.setNgayNhap(NgayNhap);
+				tbBuilder.setIsBlocked(isBlocked);
 				objItem = tbBuilder.build();
 			}
 		} catch (SQLException e) {
@@ -322,14 +329,20 @@ public class thietbiModels {
 			public ArrayList<ThietBi> getListDangKy() {
 				ArrayList<ThietBi> alTB = new ArrayList<ThietBi>();
 				conn = lcdb.GetConnectMySQL();
-				String query = "SELECT * FROM ThietBi tb WHERE tb.MaTB NOT IN (SELECT MaTB FROM ThongTinBaoDuong WHERE TinhTrang <> 3)";
+				String query = "SELECT * FROM ThietBi tb WHERE tb.MaTB NOT IN (SELECT MaTB FROM ThongTinBaoDuong WHERE TinhTrang <> 3) AND tb.isBlocked=0";
 				ThietBi.Builder builder = new ThietBi.Builder();
 				try {
 					st = conn.createStatement();
 					rs = st.executeQuery(query);
 					while(rs.next()){
 						
-						ThietBi thietbi = builder.setMaTB(rs.getInt("MaTB")).setTenTB(rs.getString("TenTB")).setMaLoaiTB(rs.getInt("MaLoaiTB")).setNgayNhap(rs.getDate("NgayNhap")).build();
+						ThietBi thietbi = builder
+								.setMaTB(rs.getInt("MaTB"))
+								.setTenTB(rs.getString("TenTB"))
+								.setMaLoaiTB(rs.getInt("MaLoaiTB"))
+								.setNgayNhap(rs.getDate("NgayNhap"))
+								.setIsBlocked(rs.getBoolean("isBlocked"))
+								.build();
 						alTB.add(thietbi);
 					}
 				} catch (SQLException e) {
@@ -344,5 +357,28 @@ public class thietbiModels {
 					}
 				}
 				return alTB;
+			}
+
+			public int blockThietBi(ThietBi thietBi) {
+				int result = 0;
+				conn = lcdb.GetConnectMySQL();
+				String query = "UPDATE ThietBi SET isBlocked=? WHERE MaTB = ? LIMIT 1";
+				try {
+					pst = conn.prepareStatement(query);
+					pst.setBoolean(1, !thietBi.isBlocked());
+					pst.setInt(2, thietBi.getMaTB());
+					pst.executeUpdate();
+					result = 1;
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						pst.close();
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				return result;
 			}
 }
