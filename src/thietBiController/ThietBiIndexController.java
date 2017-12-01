@@ -35,8 +35,8 @@ public class ThietBiIndexController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
@@ -45,40 +45,41 @@ public class ThietBiIndexController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		LibraryLogin mLogin = new LibraryLogin();
-		if(!mLogin.Login(request,response)){
+		if (!mLogin.Login(request, response)) {
 			return;
 		}
 		HttpSession session = request.getSession();
-		NguoiDung objUser = (NguoiDung)session.getAttribute("nguoidung");
-		if(objUser.getPhanQuyen() == 1) {
-			response.sendRedirect(request.getContextPath()+"/index");
+		NguoiDung objUser = (NguoiDung) session.getAttribute("nguoidung");
+		if (objUser.getPhanQuyen() == 1) {
+			response.sendRedirect(request.getContextPath() + "/index");
 			return;
 		}
 		thietbiModels mThietbiModels = new thietbiModels();
 		loaithietbiModels mLoaithietbiModels = new loaithietbiModels();
-		if ((request.getParameter("type") != null) && request.getParameter("type").equals("del")) {
+		if ((request.getParameter("type") != null)
+				&& request.getParameter("type").equals("del")) {
 			int id = Integer.parseInt(request.getParameter("id"));
 			if (mThietbiModels.xoaThietBi(id) == 1) {
-				response.sendRedirect(request.getContextPath() + "/thietbi?delmsg=1");
+				response.sendRedirect(request.getContextPath()
+						+ "/thietbi?delmsg=1");
 			} else {
-				response.sendRedirect(request.getContextPath() + "/thietbi?delmsg=0");
+				response.sendRedirect(request.getContextPath()
+						+ "/thietbi?delmsg=0");
 			}
 		} else {
 			ArrayList<ThietBi> listThietbi = mThietbiModels.getList();
-			ArrayList<LoaiThietBi> listLoaiTB = mLoaithietbiModels.getList();
+			LoaiThietBi loaiThietBi;
 			for (ThietBi tb : listThietbi) {
-				for (LoaiThietBi loaiThietBi : listLoaiTB) {
-					if (loaiThietBi.getMaLoai() == tb.getMaLoaiTB()) {
-						tb.setObjLoaiTB(loaiThietBi);
-						break;
-					}
-				}
+				loaiThietBi = mLoaithietbiModels.getItemByMaLoai(tb
+						.getMaLoaiTB());
+				tb.setObjLoaiTB(loaiThietBi);
 			}
 			request.setAttribute("alThietBi", listThietbi);
-			RequestDispatcher rd = request.getRequestDispatcher("/admin/thietbi/thietbi-danhsach.jsp");
+			RequestDispatcher rd = request
+					.getRequestDispatcher("/admin/thietbi/thietbi-danhsach.jsp");
 			rd.forward(request, response);
 		}
 	}
