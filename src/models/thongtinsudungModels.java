@@ -60,6 +60,7 @@ public class thongtinsudungModels {
 								.setBatDauSuDung(rs.getTimestamp("BatDauSuDung"))
 								.setKetThucSuDung(rs.getTimestamp("KetThucSuDung"))
 								.setTinhTrang(rs.getInt("TinhTrang"))
+								.setSoLuongMuon(rs.getInt("SoLuongMuon"))
 								.build();
 						
 						//lay thong tin dang ky cua doi tuong TTSD
@@ -164,6 +165,7 @@ public class thongtinsudungModels {
 							.setBatDauSuDung(rs.getTimestamp("BatDauSuDung"))
 							.setKetThucSuDung(rs.getTimestamp("KetThucSuDung"))
 							.setTinhTrang(rs.getInt("TinhTrang"))
+							.setSoLuongMuon(rs.getInt("SoLuongMuon"))
 							.build();
 					
 					//lay thong tin dang ky cua doi tuong TTSD
@@ -197,7 +199,7 @@ public class thongtinsudungModels {
 		public int ThemSuDungMoi(ThongTinSuDung objTTSD) {
 			int result = 0;
 			conn = lcdb.GetConnectMySQL();
-			String query = "INSERT INTO `ThongTinSuDung` (`MaTTDK`, `MaNguoiMuon`, `MaNguoiPheDuyet`, `BatDauSuDung`, `KetThucSuDung`, `TinhTrang`) VALUES (?, ?, ?, ?, ?, 1);";
+			String query = "INSERT INTO `ThongTinSuDung` (`MaTTDK`, `MaNguoiMuon`, `MaNguoiPheDuyet`, `BatDauSuDung`, `KetThucSuDung`, `TinhTrang`, `SoLuongMuon`) VALUES (?, ?, ?, ?, ?, 1, 0);";
 			try {
 				pst = conn.prepareStatement(query);
 				pst.setInt(1, objTTSD.getMaTTDK());

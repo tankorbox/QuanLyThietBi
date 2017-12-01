@@ -59,7 +59,7 @@ public class DangKySuDungController extends HttpServlet {
 			Timestamp batDauSuDung = lbDateTime.DateTimeFormToTimestamp(request.getParameter("batdausudung"));
 			Timestamp ketThucSuDung = lbDateTime.DateTimeFormToTimestamp(request.getParameter("ketthucsudung"));
 			int soLuongDK = Integer.parseInt(request.getParameter("soluongdangky"));
-			String mucDichSuDung = request.getParameter("mucdichsudung");
+			String mucDichSuDung = new String(request.getParameter("mucdichsudung").getBytes("ISO-8859-1"), "UTF-8"); 
 			
 			ThongTinDangKy.Builder builder = new ThongTinDangKy.Builder();
 			ThongTinDangKy objTTDK = builder.setMaNguoiMuon(maNguoiMuon)

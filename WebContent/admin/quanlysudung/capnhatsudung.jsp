@@ -63,16 +63,19 @@
                   <%} %>
                   </td>
                   <td class="text-center">
-                  	<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#ModelChiTiet"
-                  	onclick="ModalChiTiet(<%=objTTSD.getMaNguoiMuon()%>, '<%=objTTSD.getObjNguoiMuon().getTenND()%>', '<%=objTTSD.getObjNguoiMuon().getObjPhongBan().getTenPhongBan()%>', '<%=objTTSD.getObjNguoiMuon().getObjChucVu().getTenChucVu()%>', '<%=objTTSD.getObjTTDK().getObjLoaiTB().getTenLoai()%>', '<%=objTTSD.getObjTTDK().getObjLoaiTB().getObjLoaiCha().getTenLoai()%>', <%=objTTSD.getObjTTDK().getSoLuongDK()%>, '<%if (objTTSD.getTinhTrang() == 1){ %>Chưa giao<%} else {%>Đang sử dụng<%} %>', '<%=lbDateTime.TimestamptoString(objTTSD.getBatDauSuDung())%>', '<%=lbDateTime.TimestamptoString(objTTSD.getKetThucSuDung())%>', <%=objTTSD.getMaTTSD() %>);"
-                  	>Chi tiết</button>
                   	<%if (objTTSD.getTinhTrang() == 1){ %>
+                  		<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#ModelChiTiet"
+	                  	onclick="ModalChiTiet(<%=objTTSD.getMaNguoiMuon()%>, '<%=objTTSD.getObjNguoiMuon().getTenND()%>', '<%=objTTSD.getObjNguoiMuon().getObjPhongBan().getTenPhongBan()%>', '<%=objTTSD.getObjNguoiMuon().getObjChucVu().getTenChucVu()%>', '<%=objTTSD.getObjTTDK().getObjLoaiTB().getTenLoai()%>', '<%=objTTSD.getObjTTDK().getObjLoaiTB().getObjLoaiCha().getTenLoai()%>', <%=objTTSD.getObjTTDK().getSoLuongDK()%>, '<%if (objTTSD.getTinhTrang() == 1){ %>Chưa giao<%} else {%>Đang sử dụng<%} %>', '<%=lbDateTime.TimestamptoString(objTTSD.getBatDauSuDung())%>', '<%=lbDateTime.TimestamptoString(objTTSD.getKetThucSuDung())%>', <%=objTTSD.getMaTTSD() %>);"
+	                  	>Chi tiết</button>
                   		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModelBanGiao" 
                   		onclick="ModalBanGiao(<%=objTTSD.getMaNguoiMuon()%>, '<%=objTTSD.getObjNguoiMuon().getTenND()%>', '<%=objTTSD.getObjTTDK().getObjLoaiTB().getTenLoai()%>', '<%=objTTSD.getObjTTDK().getObjLoaiTB().getObjLoaiCha().getTenLoai()%>', <%=objTTSD.getObjTTDK().getSoLuongDK()%>, <%=objTTSD.getMaTTSD() %>, <%=objTTSD.getObjTTDK().getMaLoaiTB() %>);"
                   		>Bàn giao</button>
                   	<%} else { %>
+                  		<button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#ModelChiTiet"
+                  		onclick="ModalChiTiet(<%=objTTSD.getMaNguoiMuon()%>, '<%=objTTSD.getObjNguoiMuon().getTenND()%>', '<%=objTTSD.getObjNguoiMuon().getObjPhongBan().getTenPhongBan()%>', '<%=objTTSD.getObjNguoiMuon().getObjChucVu().getTenChucVu()%>', '<%=objTTSD.getObjTTDK().getObjLoaiTB().getTenLoai()%>', '<%=objTTSD.getObjTTDK().getObjLoaiTB().getObjLoaiCha().getTenLoai()%>', <%=objTTSD.getSoLuongMuon()%>, '<%if (objTTSD.getTinhTrang() == 1){ %>Chưa giao<%} else {%>Đang sử dụng<%} %>', '<%=lbDateTime.TimestamptoString(objTTSD.getBatDauSuDung())%>', '<%=lbDateTime.TimestamptoString(objTTSD.getKetThucSuDung())%>', <%=objTTSD.getMaTTSD() %>);"
+                  		>Chi tiết</button>
                   		<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#ModelKetThuc" 
-                  		onclick="ModalKetThuc(<%=objTTSD.getMaNguoiMuon()%>, '<%=objTTSD.getObjNguoiMuon().getTenND()%>', '<%=objTTSD.getObjNguoiMuon().getObjPhongBan().getTenPhongBan()%>', '<%=objTTSD.getObjTTDK().getObjLoaiTB().getTenLoai()%>', '<%=objTTSD.getObjTTDK().getObjLoaiTB().getObjLoaiCha().getTenLoai()%>', <%=objTTSD.getObjTTDK().getSoLuongDK()%>, '<%=lbDateTime.TimestamptoString(objTTSD.getBatDauSuDung())%>', '<%=lbDateTime.TimestamptoString(objTTSD.getKetThucSuDung())%>', <%=objTTSD.getMaTTSD() %>);"
+                  		onclick="ModalKetThuc(<%=objTTSD.getMaNguoiMuon()%>, '<%=objTTSD.getObjNguoiMuon().getTenND()%>', '<%=objTTSD.getObjNguoiMuon().getObjPhongBan().getTenPhongBan()%>', '<%=objTTSD.getObjTTDK().getObjLoaiTB().getTenLoai()%>', '<%=objTTSD.getObjTTDK().getObjLoaiTB().getObjLoaiCha().getTenLoai()%>', <%=objTTSD.getSoLuongMuon()%>, '<%=lbDateTime.TimestamptoString(objTTSD.getBatDauSuDung())%>', '<%=lbDateTime.TimestamptoString(objTTSD.getKetThucSuDung())%>', <%=objTTSD.getMaTTSD() %>);"
                   		>Kết thúc</button>
                   	<%} %>
                   </td>
