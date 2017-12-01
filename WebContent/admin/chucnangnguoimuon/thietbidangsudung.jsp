@@ -48,7 +48,7 @@
 						<td><%=objTTSD.getObjTTDK().getObjLoaiTB().getObjLoaiCha().getTenLoai()%></td>
 						<td><%=lbDateTime.TimestamptoString(objTTSD.getBatDauSuDung())%></td>
 						<td><%=lbDateTime.TimestamptoString(objTTSD.getKetThucSuDung())%></td>
-						<td class="text-center"><%=objTTSD.getObjTTDK().getSoLuongDK()%></td>
+						<td class="text-center"><%=objTTSD.getSoLuongMuon()%></td>
 						<td class="text-center">
 							<%
 								if (objTTSD.getTinhTrang() == 1) {

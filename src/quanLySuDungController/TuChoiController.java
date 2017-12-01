@@ -54,7 +54,9 @@ public class TuChoiController extends HttpServlet {
 		String thongBao = new String(request.getParameter("thongBao").getBytes("ISO-8859-1"),"UTF-8");
 		
 		thongtindangkyModels mTTDK = new thongtindangkyModels();
-		if (mTTDK.TuChoi(maTTDK, thongBao) == 1) {
+		int[] arMaTTDK = {maTTDK};
+		System.out.println(arMaTTDK[0]);
+		if (mTTDK.TuChoi(arMaTTDK, thongBao) == 1) {
 			response.sendRedirect(request.getContextPath() + "/qlsd-pheduyetdangky?msgtuchoi=1");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/qlsd-pheduyetdangky?msgtuchoi=0");

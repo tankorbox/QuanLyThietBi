@@ -53,7 +53,11 @@
 					%>
 					<tr>
 						<td class="text-center"><%=objTTDK.getMaTTDK()%></td>
+<<<<<<< HEAD
 						<td><%= objTTDK.getObjNguoiDung().getTenND() %></td>
+=======
+						<td><%=objTTDK.getObjNguoiDung().getTenND() %></td>
+>>>>>>> ec9b15cc8ff95fdfac853efb71e37f021537a109
 						<td><%=objTTDK.getObjLoaiTB().getTenLoai()%></td>
 						<td><%=objTTDK.getObjLoaiTB().getObjLoaiCha().getTenLoai()%></td>
 						<td class="text-center"><%=objTTDK.getSoLuongDK()%></td>
@@ -61,9 +65,9 @@
 						<td class="text-center">
 							<button type="button" class="btn btn-outline-info"
 								data-toggle="modal" data-target="#ModelChiTiet"
-								onclick="ChiTiet(<%=objTTDK.getMaNguoiMuon()%>, '<%=objTTDK.getObjNguoiDung().getTenND()%>', '<%=objTTDK.getObjNguoiDung().getObjPhongBan().getTenPhongBan()%>', '<%=objTTDK.getObjNguoiDung().getObjChucVu().getTenChucVu()%>', '<%=objTTDK.getObjLoaiTB().getTenLoai()%>', '<%=objTTDK.getObjLoaiTB().getObjLoaiCha().getTenLoai()%>', <%=objTTDK.getSoLuongDK()%>, '<%=lbDateTime.TimestamptoString(objTTDK.getThoiGianDangKy())%>', '<%=lbDateTime.TimestamptoString(objTTDK.getDKBatDauSuDung())%>', '<%=lbDateTime.TimestamptoString(objTTDK.getDKKetThucSuDung())%>', '<%=objTTDK.getMucDichSuDung()%>');">Chi
+								onclick="ChiTiet(<%=objTTDK.getMaNguoiMuon()%>, '<%=objTTDK.getObjNguoiDung().getTenND()%>', '<%=objTTDK.getObjNguoiDung().getObjPhongBan().getTenPhongBan()%>', '<%=objTTDK.getObjNguoiDung().getObjChucVu().getTenChucVu()%>', '<%=objTTDK.getObjLoaiTB().getTenLoai()%>', '<%=objTTDK.getObjLoaiTB().getObjLoaiCha().getTenLoai()%>', <%=objTTDK.getSoLuongDK()%>, '<%=lbDateTime.TimestamptoString(objTTDK.getThoiGianDangKy())%>', '<%=lbDateTime.TimestamptoString(objTTDK.getDKBatDauSuDung())%>', '<%=lbDateTime.TimestamptoString(objTTDK.getDKKetThucSuDung())%>', '<%=objTTDK.getMucDichSuDung().toString()%>');">Chi
 								tiết</button>
-							<button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModelConfirm" onclick="getTTDKTrung(<%=objTTDK.getMaLoaiTB()%>, <%=objTTDK.getDKBatDauSuDung().getTime()%>, <%=objTTDK.getDKKetThucSuDung().getTime()%>);">Phê duyệt</button>
+							<button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModelConfirm" onclick="getTTDKTrung(<%=objTTDK.getMaTTDK()%>, <%=objTTDK.getMaLoaiTB()%>, <%=objTTDK.getDKBatDauSuDung().getTime()%>, <%=objTTDK.getDKKetThucSuDung().getTime()%>, <%=objTTDK.getSoLuongDK()%>, <%=objTTDK.getMaNguoiMuon()%>);">Phê duyệt</button>
 							<button type="button" class="btn btn-danger" data-toggle="modal"
 								data-target="#ModelTuChoi" onclick="TuChoi(<%=objTTDK.getMaTTDK()%>)">Từ chối</button>
 						</td>
@@ -73,6 +77,47 @@
 					%>
 				</tbody>
 			</table>
+		</div>
+	</div>
+
+	<!-- Modal confirm phe duyet-->
+	<div class="modal fade" id="ModelConfirm" role="dialog">
+		<div class="modal-dialog ">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Xác nhận phê duyệt</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body">
+					<p>Sau khi bạn phê duyệt đăng ký này, các đăng ký khác trùng ngày với đăng ký này mà không đảm bảo số lượng khả dụng sẽ bị <span style="color: red; font-weight: bold;">"Từ Chối"</span>.</p>
+					<form>
+						<div class="form-group">
+							<div class="form-row">
+								<div class="col-md-12">
+									<table class="table table-bordered">
+					                	<thead>
+							                <tr>
+							                  <th class="text-center" width="50px">Mã DK</th>
+							                  <th>Bắt đầu</th>
+							                  <th>Kết thúc</th>
+							                  <th class="text-center" width="100px">Xem chi tiết</th>
+							                </tr>
+							              </thead>
+							              <tbody id="ajax_dangkytrung">
+							              
+							              </tbody>
+                </table>									
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-warning" id="xacnhanpheduyet-btn">Xác nhận</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -179,75 +224,31 @@
 		</div>
 	</div>
 	
-	<!-- Modal confirm phe duyet-->
-	<div class="modal fade" id="ModelConfirm" role="dialog">
-		<div class="modal-dialog ">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Xác nhận phê duyệt</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-					<p>Sau khi bạn phê duyệt đăng ký này, các đăng ký khác trùng ngày với đăng ký này mà không đảm bảo số lượng khả dụng sẽ bị <span style="color: red; font-weight: bold;">"Từ Chối"</span>.</p>
-					<form>
-						<div class="form-group">
-							<div class="form-row">
-								<div class="col-md-12">
-									<table class="table table-bordered">
-					                	<thead>
-							                <tr>
-							                  <th class="text-center" width="50px">Mã DK</th>
-							                  <th>Bắt đầu</th>
-							                  <th>Kết thúc</th>
-							                  <th class="text-center" width="100px">Xem chi tiết</th>
-							                </tr>
-							              </thead>
-							              <tbody>
-							              <%for (ThongTinDangKy objTTDK : alTTDK){ %>
-							                <tr>
-							                  <td class="text-center"><%=objTTDK.getMaTTDK() %></td>
-							                  <td><%=lbDateTime.TimestamptoString(objTTDK.getDKBatDauSuDung()) %></td>
-							                  <td><%=lbDateTime.TimestamptoString(objTTDK.getDKKetThucSuDung()) %></td>
-							                  <td class="text-center"><button type="button" class="btn btn-outline-info"
-								data-toggle="modal" data-target="#ModelChiTiet"
-								onclick="ChiTiet(<%=objTTDK.getMaNguoiMuon()%>, '<%=objTTDK.getObjNguoiDung().getTenND()%>', '<%=objTTDK.getObjNguoiDung().getObjPhongBan().getTenPhongBan()%>', '<%=objTTDK.getObjNguoiDung().getObjChucVu().getTenChucVu()%>', '<%=objTTDK.getObjLoaiTB().getTenLoai()%>', '<%=objTTDK.getObjLoaiTB().getObjLoaiCha().getTenLoai()%>', <%=objTTDK.getSoLuongDK()%>, '<%=lbDateTime.TimestamptoString(objTTDK.getThoiGianDangKy())%>', '<%=lbDateTime.TimestamptoString(objTTDK.getDKBatDauSuDung())%>', '<%=lbDateTime.TimestamptoString(objTTDK.getDKKetThucSuDung())%>', '<%=objTTDK.getMucDichSuDung()%>');">Chi
-								tiết</button></td>
-							                </tr>
-							               <%} %>
-							              </tbody>
-                </table>									
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-warning">Xác nhận</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	<script>
-		function getTTDKTrung(maLoai, batDau, ketThuc){
+		function getTTDKTrung(maTTDK, maLoai, batDau, ketThuc, soLuong, maNguoiMuon){
 			$.ajax({
 	      		url: '<%=request.getContextPath()%>/qlsd-danhsachtrung',
 	           	type: 'POST',
 	         	cache: false,
 	            data: {
+	            	maTTDK: maTTDK,
 	            	maLoai: maLoai,
 	            	batDau: batDau,
-	            	ketThuc: ketThuc
+	            	ketThuc: ketThuc,
+	            	soLuong: soLuong
 	            },
 	            success: function(data){
+	            	$("#ajax_dangkytrung").html(data);
 	          	},
 	           	error: function (){
 	            	//Xử lý nếu có lỗi
 	                confirm('Có vấn đề xảy ra');
 	            }
 	     	});
+			
+			document.getElementById("xacnhanpheduyet-btn").setAttribute( "onClick", "PheDuyet(" + maTTDK + "," + maNguoiMuon + "," + ketThuc +"," + batDau +"," + soLuong +", " + maLoai +")" );
 		}
 	
 		function ChiTiet(maND, tenND, phongBan, chucVu, tenTB, loaiTB, soLuong, dangKy, batDau, ketThuc, mucDich) {
@@ -268,10 +269,10 @@
 			document.getElementById("modal-maTTDK").value = maTTDK;
 		}
 		
-		  function PheDuyet(maTTDK, maNguoiMuon, dkBatDauSuDung, dkKetThucSuDung, soLuong, maLoaiTB){
+		  function PheDuyet(maTTDK, maNguoiMuon, dkKetThucSuDung, dkBatDauSuDung, soLuong, maLoai){
 			  var conf = confirm("Bạn muốn phê duyệt đăng ký này?");
 			  if(conf == true){
-				  window.location.href = '<%=request.getContextPath()%>/qlsd-pheduyet?maTTDK=' + maTTDK + '&maNguoiMuon=' + maNguoiMuon + '&dkBatDauSuDung=' + dkBatDauSuDung + '&dkKetThucSuDung=' + dkKetThucSuDung + '&soLuong=' + soLuong + '&maLoaiTB=' + maLoaiTB;
+				  window.location.href = '<%=request.getContextPath()%>/qlsd-pheduyet?maTTDK=' + maTTDK + '&maNguoiMuon=' + maNguoiMuon + '&dkKetThucSuDung=' + dkKetThucSuDung + '&dkBatDauSuDung=' + dkBatDauSuDung+ '&soLuong=' + soLuong+ '&maLoai=' + maLoai ;
 			  }
 			}
 	</script>

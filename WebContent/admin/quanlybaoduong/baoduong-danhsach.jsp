@@ -43,7 +43,6 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Mã thiết bị</th>
                   <th>Tên thiết bị</th>
                   <th>Loại thiết bị</th>
                   <th>Tình trạng</th>
@@ -56,7 +55,6 @@
               for(ThongTinBaoDuong baoDuongObj : alBaoDuong) {%>
                 <tr>
                   <td><%= baoDuongObj.getMaTTBD() %></td>
-                  <td><%= baoDuongObj.getObjThietBi().getMaTB() %></td>
                   <td><%= baoDuongObj.getObjThietBi().getTenTB() %></td>
                   <td><%= baoDuongObj.getObjLoaiThietBi().getTenLoai() %></td>
                   <td>

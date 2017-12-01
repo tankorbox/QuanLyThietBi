@@ -51,12 +51,7 @@ public class LoginPostController extends HttpServlet {
 		NguoiDung nguoidung = mUser.getUserLogin(tendangnhap,matkhau);
 		if(nguoidung==null){
 			response.sendRedirect(request.getContextPath()+"/login?msg=0");
-			return;
 		}else{
-			if(nguoidung.isBlocked()) {
-				response.sendRedirect(request.getContextPath()+"/login?msg=block");
-				return;
-			}
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(86400);
 			session.setAttribute("nguoidung", nguoidung);

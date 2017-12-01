@@ -148,11 +148,6 @@
     		<div class="alert alert-danger"><p><strong>Tên đăng nhập hoặc mật khẩu không chính xác</strong></p></div>
     		<%
     		}
-    		if (request.getParameter("msg") != null && request.getParameter("msg").equals("block")) {
-        	%>
-        	<div class="alert alert-danger"><p><strong>Tài khoản của bạn hiện đang bị tạm khóa!</strong></p></div>
-        	<%
-        	}
     		%>
     		</div>
     	</body>
