@@ -25,12 +25,6 @@
       if (request.getParameter("add") != null && request.getParameter("add").equals("0")) {%>
 		<div class="alert alert-danger" style="color: red">Thêm không thành công!</div>
 <%}
-      if (request.getParameter("block") != null && request.getParameter("block").equals("1")) {%>
-		<div class="alert alert-success" style="color: black">Loại thiêt bị này đã câp nhật!</div>
-	  	<%}
-	      if (request.getParameter("block") != null && request.getParameter("block").equals("0")) {%>
-			<div class="alert alert-danger" style="color: red">Cập nhật không thành công!</div>
-		<%}
       %>
       <div class="col-md-12" style="margin-bottom: 10px">
       	<div class="col-md-6" style="margin-bottom: 10px">
@@ -66,13 +60,7 @@
           			<a href="<%=request.getContextPath()%>/loaithietbimuc2-sua?maloaithietbi=<%=loaiThietBi.getMaLoai() %>" class="btn btn-warning">Sửa</a>
                   </td>
                   <td class="text-center">
-          			<a href="<%=request.getContextPath()%>/loaithietbimuc2-block?maLoaiThietBi=<%=loaiThietBi.getMaLoai()%>">
-		                 	<%if(!loaiThietBi.isBlocked()) {%>
-		          			<span class="btn btn-danger">Khóa</span>
-		          			<%}else{ %>
-		          			<span class="btn btn-warning">Mở khóa</span>
-		          			<%} %>
-                 		</a>
+          			<a href="<%= request.getContextPath() %>/thietbi-xoa" class="btn btn-danger">Xóa</a>
                   </td>
                   <td class="text-center">
           			<a href="<%= request.getContextPath() %>/loaithietbimuc2-chi-tiet?maloaithietbi=<%=loaiThietBi.getMaLoai() %>" class="btn btn-success">Chi tiết</a>

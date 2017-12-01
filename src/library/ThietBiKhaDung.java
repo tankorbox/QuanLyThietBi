@@ -8,7 +8,6 @@ import beans.ThongTinDangKy;
 import models.baoduongModel;
 import models.loaithietbiModels;
 import models.thongtindangkyModels;
-import models.thietbiModels;
 import models.thongtinsudungModels;
 
 public class ThietBiKhaDung {
@@ -24,11 +23,9 @@ public class ThietBiKhaDung {
 		//So thiet bi dang su dung
 		thongtinsudungModels mTTSD = new thongtinsudungModels();
 		int soLuongDangSuDung = mTTSD.getSoLuongDangSuDung(maLoai, batDau, ketThuc);
-		System.out.println(soLuongDangSuDung+"=========sudung===================================");
 		//so thiet bi dang bao duong
 		baoduongModel mBaoDuong = new baoduongModel();
 		int soLuongBaoDuong = mBaoDuong.getSoLuongDangBaoDuong(maLoai, batDau, ketThuc);
-		System.out.println(soLuongBaoDuong+"==========baoduong==================================");
 		//So luong kha dung
 		soLuongKhaDung = tongSoLuong - (soLuongDangSuDung + soLuongBaoDuong);
 		

@@ -16,14 +16,7 @@
 		if(request.getParameter("notfound") != null){
 		%>
 		<div class="alert alert-danger" style="color: red">Không tìm thấy!</div>
-		<%}
-		if (request.getParameter("block") != null && request.getParameter("block").equals("1")) {%>
-		<div class="alert alert-success" style="color: black">Loại thiêt bị này đã câp nhật!</div>
-	  	<%}
-	      if (request.getParameter("block") != null && request.getParameter("block").equals("0")) {%>
-			<div class="alert alert-danger" style="color: red">Cập nhật không thành công!</div>
-		<%}
-		%>
+		<%} %>
 		<div class="col-md-12" style="margin-bottom: 10px ">
 			<div class="col-md-3" style="margin-bottom: 10px">
 				<a href="<%=request.getContextPath()%>/loaithietbimuc1-them"
@@ -49,18 +42,13 @@
                 <tr>
                   <td><%= loaiThietBi.getMaLoai()%></td>
                   <td><%= loaiThietBi.getTenLoai() %></td>
-                  <td class="text-center">
-                 		<a href="<%=request.getContextPath()%>/loaithietbimuc1-sua?maLoaiThietBi=<%=loaiThietBi.getMaLoai()%>" class="btn btn-warning">
-                 		Sửa
-                 		</a>
-                 		<a href="<%=request.getContextPath()%>/loaithietbimuc1-block?maLoaiThietBi=<%=loaiThietBi.getMaLoai()%>">
-		                 	<%if(!loaiThietBi.isBlocked()) {%>
-		          			<span class="btn btn-danger">Khóa</span>
-		          			<%}else{ %>
-		          			<span class="btn btn-warning">Mở khóa</span>
-		          			<%} %>
-                 		</a>
-				</td>
+                  
+                 <td class="text-center"><a
+							href="<%=request.getContextPath()%>/loaithietbimuc1-sua?maLoaiThietBi=<%=loaiThietBi.getMaLoai()%>"
+							class="btn btn-warning">Sửa</a> <a
+							href="" onclick="confirmDeleteNews(<%=loaiThietBi.getMaLoai() %>);"
+							class="btn btn-danger">Xóa</a></td>
+
                 </tr>
               <% }}catch(Exception e) {
       			System.out.print(e.getMessage());

@@ -67,7 +67,7 @@ public class LoaiThietBiMuc2ThemController extends HttpServlet {
 							.setTenLoai(tenhang)
 							.setSoLuong(soluong)
 							.build();
-			int result = mLoaithietbiModel.addLoaiThietBiLoai2Transaction(loaiThietBi);
+			int result = mLoaithietbiModel.addLoaiThietBiMuc2(loaiThietBi);
 			response.sendRedirect(request.getContextPath()+"/loaithietbimuc2-danhsach?add="+result);
 			return;
 		} else {
