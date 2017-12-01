@@ -1,7 +1,6 @@
-package chucNangNguoiMuonController;
+package userController;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,22 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.NguoiDung;
-import beans.ThongTinDangKy;
 import library.LibraryLogin;
-import models.loaithietbiModels;
-import models.thietbiModels;
-import models.thongtindangkyModels;
 
 /**
- * Servlet implementation class DanhSachThietBiController
+ * Servlet implementation class UserProfileController
  */
-public class YeuCauDaGuiController extends HttpServlet {
+public class UserChangePasswordController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public YeuCauDaGuiController() {
+    public UserChangePasswordController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +31,8 @@ public class YeuCauDaGuiController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);	}
+		doPost(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -46,20 +42,8 @@ public class YeuCauDaGuiController extends HttpServlet {
 		if(!mLogin.Login(request,response)){
 			return;
 		}
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html");
-		
-		HttpSession session = request.getSession();
-		NguoiDung nguoidung = (NguoiDung) session.getAttribute("nguoidung");
-		int maND = nguoidung.getMaND();
-		
-		//Lay danh sach TTDK
-		thongtindangkyModels mTTDK = new thongtindangkyModels();
-		ArrayList<ThongTinDangKy> alTTDK = mTTDK.getListByMaND(maND);
-		
-		request.setAttribute("alTTDK", alTTDK);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/admin/chucnangnguoimuon/yeucaudagui.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/admin/user/change-password.jsp");
 		rd.forward(request, response);
 	}
+
 }

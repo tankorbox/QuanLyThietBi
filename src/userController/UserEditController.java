@@ -59,13 +59,7 @@ public class UserEditController extends HttpServlet {
 		NguoiDung nd = new userModels().getById(id);
 		if (nd!=null) {
 			ArrayList<ChucVu> listCV = new chucvuModels().getList();
-			for (ChucVu chucVu : listCV) {
-				System.out.println(chucVu.getTenChucVu());
-			}
 			ArrayList<PhongBan> listPB = new phongbanModels().getList();
-			for (PhongBan phongBan : listPB) {
-				System.out.println(phongBan.getTenPhongBan());
-			}
 			request.setAttribute("listCV", listCV);
 			request.setAttribute("listPB", listPB);
 			request.setAttribute("nguoidung", nd);
@@ -74,6 +68,7 @@ public class UserEditController extends HttpServlet {
 		}
 		else {
 			response.sendRedirect(request.getContextPath()+"/user-notfound");
+			return;
 		}
 	}
 

@@ -76,7 +76,7 @@ public class PheDuyetController extends HttpServlet {
 		//Từ chối các đăng ký bị trùng
 		ArrayList<ThongTinDangKy> alTuChoi = khadung.PheDuyetTrung(maTTDK, maLoai, dkBatDauSuDung, dkKetThucSuDung, soLuong);
 		if(alTuChoi.size() > 0) {
-			String thongBao = "Đã có đơn đăng ký khác được phê duyệt và đơn đăng ký của bạn "
+			String thongBao = " có đơn đăng ký khác được phê duyệt và đơn đăng ký của bạn "
 					+ "không đảm bảo số lượng thiết bị trong thời gian bạn đăng ký sử dụng.";
 			int[] arMaTTDK = new int[alTuChoi.size()];
 			for (int i=0; i<alTuChoi.size(); i++) {
@@ -97,6 +97,9 @@ public class PheDuyetController extends HttpServlet {
 				.setKetThucSuDung(new Timestamp(dkKetThucSuDung))
 				.build();
 				
+		ThongTinDangKy.Builder TTDKBuilder = new ThongTinDangKy.Builder();
+		ThongTinDangKy objTTDK = TTDKBuilder.setSoLuongDK(soLuong).build();
+		objTTSD.setObjTTDK(objTTDK);
 		if (mTTSD.ThemSuDungMoi(objTTSD) == 1) {
 			response.sendRedirect(request.getContextPath() + "/qlsd-pheduyetdangky?msgpheduyet=1");
 		} else {

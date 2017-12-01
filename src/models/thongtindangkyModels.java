@@ -59,6 +59,37 @@ public class thongtindangkyModels {
 		}
 		return alTTDK;
 	}
+	
+	// LAY DANH SACH TTDK đã đăng ký trước đó
+		public ArrayList<ThongTinDangKy> getListTrung(int maLoai) {
+			ArrayList<ThongTinDangKy> alTTDK = new ArrayList<>();
+			ThongTinDangKy.Builder builder = new ThongTinDangKy.Builder();
+			conn = lcdb.GetConnectMySQL();
+			String query = "SELECT * FROM ThongTinDangKy WHERE MaLoaiTB = ? AND TinhTrang = 1";
+			try {
+				pst = conn.prepareStatement(query);
+				pst.setInt(1, maLoai);
+				rs = pst.executeQuery();
+				while (rs.next()) {
+					ThongTinDangKy objItem = builder.setMaTTDK(rs.getInt("MaTTDK"))
+							.setDKBatDauSuDung(rs.getTimestamp("DKBatDauSuDung"))
+							.setDKKetThucSuDung(rs.getTimestamp("DKKetThucSuDung")).setSoLuongDK(rs.getInt("SoLuongDK"))
+							.build();
+					alTTDK.add(objItem);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					rs.close();
+					pst.close();
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return alTTDK;
+		}
 
 	// Them dang ky moi
 	public int ThemDangKy(ThongTinDangKy objTTDK) {

@@ -27,7 +27,14 @@
 			<%}%>
 		<%if (request.getParameter("editmsg") != null && request.getParameter("editmsg").equals("1")) {%>
 				<div class="alert alert-success">Chỉnh sửa thành công</div>
-			<%}%>
+			<%}
+		if (request.getParameter("block") != null && request.getParameter("block").equals("1")) {%>
+		<div class="alert alert-success" style="color: black">Cập nhật thành công!</div>
+	  	<%}
+	      if (request.getParameter("block") != null && request.getParameter("block").equals("0")) {%>
+			<div class="alert alert-danger" style="color: red">Cập nhật không thành công!</div>
+		<%}
+			%>
 		<div class="col-md-12" style="margin-bottom: 10px">
 			<div class="col-md-6" style="margin-bottom: 10px">
 				<a href="<%=request.getContextPath()%>/thietbi-them?type=load"
@@ -56,13 +63,16 @@
 						<td class="text-center"><%=item.getTenTB() %></td>
 						<td class="text-center"><%=item.getObjLoaiTB().getTenLoai() %></td>
 						<td class="text-center"><%=item.getNgayNhap() %></td>
-						<td class="text-center">
+						<td>
 							<a href="<%=request.getContextPath()%>/thietbi-sua?type=load&id=<%=item.getMaTB() %>"
-							class="btn btn-warning">Sửa</a> 
-							<a href="<%=request.getContextPath()%>/thietbi?type=del&id=<%=item.getMaTB() %>"
-							class="btn btn-danger" onclick="return confirm(&#039;Are you sure?&#039;)">Xóa</a>
+							class="btn btn-primary">Sửa</a> 
 							<a href="<%=request.getContextPath()%>/thietbi-chitiet?id=<%=item.getMaTB() %>"
 							class="btn btn-success">Chi tiết</a>
+							<a href="<%=request.getContextPath()%>/thietbi-block?maTB=<%=item.getMaTB()%>">
+			                 	<%if(!item.isBlocked()) {%>
+			          			<span class="btn btn-danger">Xóa</span>
+			          			<%}%>
+                 			</a>
 					</tr>
 					<%} %>
 				</tbody>

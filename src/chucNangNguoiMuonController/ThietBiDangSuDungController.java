@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import beans.NguoiDung;
 import beans.ThongTinDangKy;
 import beans.ThongTinSuDung;
 import library.LibraryLogin;
@@ -47,8 +49,9 @@ public class ThietBiDangSuDungController extends HttpServlet {
 			return;
 		}
 		response.setCharacterEncoding("utf-8");
-		
-		int maND = 5;
+		HttpSession session = request.getSession();
+		NguoiDung nguoidung = (NguoiDung) session.getAttribute("nguoidung");
+		int maND = nguoidung.getMaND();
 		
 		//Lay danh sach TTSD
 		thongtinsudungModels mTTSD = new thongtinsudungModels();

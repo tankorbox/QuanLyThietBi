@@ -206,7 +206,7 @@
 							<div class="form-row">
 								<div class="col-md-12">
 									<input type="hidden" name="maTTDK" value="" id="modal-maTTDK">
-									<textarea class="form-control" rows="5" name="thongBao"></textarea>
+									<textarea class="form-control" rows="5" name="thongBao" required></textarea>
 								</div>
 							</div>
 						</div>

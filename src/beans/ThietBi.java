@@ -9,6 +9,7 @@ public class ThietBi {
 	private Date ngayNhap;
 	private int TinhTrang;
 	private LoaiThietBi objLoaiTB;
+	private boolean isBlocked;
 	
 	private ThietBi(Builder builder) {
 		maTB = builder.maTB;
@@ -17,6 +18,7 @@ public class ThietBi {
 		ngayNhap = builder.ngayNhap;
 		TinhTrang = builder.TinhTrang;
 		objLoaiTB = builder.objLoaiTB;
+		isBlocked = builder.isBlocked;
 	}
 	
 	public static class Builder {
@@ -26,6 +28,7 @@ public class ThietBi {
 		private Date ngayNhap;
 		private int TinhTrang;
 		private LoaiThietBi objLoaiTB;
+		private boolean isBlocked;
 		
 		public Builder() {
 			
@@ -68,6 +71,10 @@ public class ThietBi {
 			return this;
 		}
 		
+		public Builder setIsBlocked(boolean isBlocked) {
+			this.isBlocked = isBlocked;
+			return this;
+		}
 	}
 
 	public int getMaTB() {
@@ -116,6 +123,14 @@ public class ThietBi {
 
 	public void setObjLoaiTB(LoaiThietBi objLoaiTB) {
 		this.objLoaiTB = objLoaiTB;
+	}
+
+	public boolean isBlocked() {
+		return isBlocked;
+	}
+
+	public void setBlocked(boolean isBlocked) {
+		this.isBlocked = isBlocked;
 	}
 
 	@Override

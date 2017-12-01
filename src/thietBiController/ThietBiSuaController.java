@@ -56,10 +56,8 @@ public class ThietBiSuaController extends HttpServlet {
 		}
 		thietbiModels thModels = new thietbiModels();
 		
-		System.out.println("entered thietbisua controller"+request.getParameter("type"));
 		
 		if (request.getParameter("type").equals("load")) {
-			System.out.println("loaded");
 			int id = Integer.parseInt(request.getParameter("id"));
 			ThietBi thietBi = thModels.getById(id);
 			ArrayList<LoaiThietBi> listLoaiTB = new loaithietbiModels().getList();
@@ -91,9 +89,11 @@ public class ThietBiSuaController extends HttpServlet {
 			tbBuilder.setNgayNhap(date);
 			if (thModels.chinhSuaThietBi(tbBuilder.build())==1) {
 				response.sendRedirect(request.getContextPath()+"/thietbi?editmsg=1");
+				return;
 			}
 			else {
 				response.sendRedirect(request.getContextPath()+"/thietbi-sua?type=load&editmsg=0");
+				return;
 			}
 		}
 		else {

@@ -1,6 +1,7 @@
-package chucNangNguoiMuonController;
+package thietBiController;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -11,23 +12,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.LoaiThietBi;
 import beans.NguoiDung;
-import beans.ThongTinDangKy;
+import beans.ThietBi;
 import library.LibraryLogin;
 import models.loaithietbiModels;
 import models.thietbiModels;
-import models.thongtindangkyModels;
 
 /**
- * Servlet implementation class DanhSachThietBiController
+ * Servlet implementation class ThietBiThemController
  */
-public class YeuCauDaGuiController extends HttpServlet {
+public class ThietBiBlockController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public YeuCauDaGuiController() {
+    public ThietBiBlockController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +37,8 @@ public class YeuCauDaGuiController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);	}
+		doPost(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -46,20 +48,27 @@ public class YeuCauDaGuiController extends HttpServlet {
 		if(!mLogin.Login(request,response)){
 			return;
 		}
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html");
-		
 		HttpSession session = request.getSession();
-		NguoiDung nguoidung = (NguoiDung) session.getAttribute("nguoidung");
-		int maND = nguoidung.getMaND();
-		
-		//Lay danh sach TTDK
-		thongtindangkyModels mTTDK = new thongtindangkyModels();
-		ArrayList<ThongTinDangKy> alTTDK = mTTDK.getListByMaND(maND);
-		
-		request.setAttribute("alTTDK", alTTDK);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/admin/chucnangnguoimuon/yeucaudagui.jsp");
-		rd.forward(request, response);
+		NguoiDung objUser = (NguoiDung)session.getAttribute("nguoidung");
+		if(objUser.getPhanQuyen() == 1) {
+			response.sendRedirect(request.getContextPath()+"/index");
+			return;
+		}
+		thietbiModels thModels = new thietbiModels();
+			int maTB = Integer.parseInt(request.getParameter("maTB"));
+			ThietBi thietBi = thModels.getById(maTB);
+			int block = thModels.blockThietBi(thietBi);
+			if(block>0) {
+				int change = -1;
+				if(thietBi.isBlocked()) {
+					change = 1;
+				}
+				//thay doi so luong thiet bi loai 2
+				loaithietbiModels ltbModel = new loaithietbiModels();
+				ltbModel.changeSL(thietBi.getMaLoaiTB(),change);
+			}
+			response.sendRedirect(request.getContextPath()+"/thietbi?block="+block);
+			return;
 	}
+
 }

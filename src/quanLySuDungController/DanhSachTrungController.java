@@ -69,16 +69,22 @@ public class DanhSachTrungController extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		LibraryFormatDateTime lbDateTime = new LibraryFormatDateTime();
-		for (ThongTinDangKy objTTDK : alTTDK) {
-				out.println("<tr>");
-		        out.println("<td class=\"text-center\">" + objTTDK.getMaTTDK() +"</td>");
-		        out.println("<td>" + lbDateTime.TimestamptoString(objTTDK.getDKBatDauSuDung()) + "</td>");
-		        out.println("<td>" + lbDateTime.TimestamptoString(objTTDK.getDKKetThucSuDung()) + "</td>");
-		        out.println("<td class=\"text-center\"><button type=\"button\" class=\"btn btn-outline-info\"" +
-					"data-toggle=\"modal\" data-target=\"#ModelChiTiet\"" +
-					"onclick=\"ChiTiet(" + objTTDK.getMaNguoiMuon() +", '" + objTTDK.getObjNguoiDung().getTenND() + "', '" + objTTDK.getObjNguoiDung().getObjPhongBan().getTenPhongBan() + "', '" + objTTDK.getObjNguoiDung().getObjChucVu().getTenChucVu() + "', '" + objTTDK.getObjLoaiTB().getTenLoai() + "', '" + objTTDK.getObjLoaiTB().getObjLoaiCha().getTenLoai() + "', " + objTTDK.getSoLuongDK() + ", '" + lbDateTime.TimestamptoString(objTTDK.getThoiGianDangKy()) + "', '" + lbDateTime.TimestamptoString(objTTDK.getDKBatDauSuDung()) + "', '" + lbDateTime.TimestamptoString(objTTDK.getDKKetThucSuDung()) + "', '" + objTTDK.getMucDichSuDung() + "');\">"
-					+ "Chi tiết</button></td>");
-		      out.println("</tr>");
+		if(alTTDK.size()>0) {
+			for (ThongTinDangKy objTTDK : alTTDK) {
+					out.println("<tr>");
+			        out.println("<td class=\"text-center\">" + objTTDK.getMaTTDK() +"</td>");
+			        out.println("<td>" + lbDateTime.TimestamptoString(objTTDK.getDKBatDauSuDung()) + "</td>");
+			        out.println("<td>" + lbDateTime.TimestamptoString(objTTDK.getDKKetThucSuDung()) + "</td>");
+			        out.println("<td class=\"text-center\"><button type=\"button\" class=\"btn btn-outline-info\"" +
+						"data-toggle=\"modal\" data-target=\"#ModelChiTiet\"" +
+						"onclick=\"ChiTiet(" + objTTDK.getMaNguoiMuon() +", '" + objTTDK.getObjNguoiDung().getTenND() + "', '" + objTTDK.getObjNguoiDung().getObjPhongBan().getTenPhongBan() + "', '" + objTTDK.getObjNguoiDung().getObjChucVu().getTenChucVu() + "', '" + objTTDK.getObjLoaiTB().getTenLoai() + "', '" + objTTDK.getObjLoaiTB().getObjLoaiCha().getTenLoai() + "', " + objTTDK.getSoLuongDK() + ", '" + lbDateTime.TimestamptoString(objTTDK.getThoiGianDangKy()) + "', '" + lbDateTime.TimestamptoString(objTTDK.getDKBatDauSuDung()) + "', '" + lbDateTime.TimestamptoString(objTTDK.getDKKetThucSuDung()) + "', '" + objTTDK.getMucDichSuDung() + "');\">"
+						+ "Chi tiết</button></td>");
+			      out.println("</tr>");
+			}
+		}else {
+			out.println("<tr>");
+			out.print("<td colspan=\"4\" class=\"text-center\">Không có đăng ký bị ảnh hưởng</td>");
+			out.println("</tr>");
 		}
 	}
 
