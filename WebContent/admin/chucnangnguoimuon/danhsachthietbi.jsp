@@ -15,12 +15,8 @@
         </li>
       </ol>
       <%if (request.getParameter("msgdangky") != null && request.getParameter("msgdangky").equals("1")) {%>
-			<div class="alert alert-success">Đăng ký thành công!</div>
-	  <%}if (request.getParameter("msg") != null && request.getParameter("msg").equals("not-found")) {%>
-			<div class="alert alert-danger">Loại thiết bị không tồn tại!</div>
-	  <%}if (request.getParameter("msg") != null && request.getParameter("msg").equals("block")) {%>
-			<div class="alert alert-danger">Loại thiết bị này đang bị tạm khóa!</div>
-	  <%}%>
+				<div class="alert alert-success">Đăng ký thành công</div>
+			<%}%>
       <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
@@ -28,7 +24,6 @@
                   <th class="text-center" width="50px">#</th>
                   <th>Tên thiết bị</th>
                   <th>Loại thiết bị</th>
-                  <th>Trạng thái</th>
                   <th class="text-center" width="100px">Chức năng</th>
                 </tr>
               </thead>
@@ -44,17 +39,8 @@
 		                  		<td><%=loaiCha.getTenLoai() %></td>
 		                  	<%break; } %>
 		                  <%} %>
-		                  <td>
-		                  <%if(item.isBlocked() || item.getObjLoaiCha().isBlocked()){%>
-		                  <span style="color:red">Đang tạm khóa</span>
-		                  <%}else{ %>
-		                  <span style="color:blue">Khả dụng</span>
-		                  <%} %>
-		                  </td>
 		                  <td class="text-center">
-		                  <%if(!item.isBlocked() && !item.getObjLoaiCha().isBlocked()){%>
 		          			<a href="<%= request.getContextPath() %>/cnnm-dangkysudung?type=load&maLoaiTB=<%=item.getMaLoai()%>" class="btn btn-success">Đăng ký</a>
-		          			<%} %>
 		                  </td>
 		                </tr>
 	                <%} else {

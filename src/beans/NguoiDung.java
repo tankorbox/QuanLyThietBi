@@ -15,7 +15,6 @@ public class NguoiDung {
 	private int phanQuyen;
 	private ChucVu objChucVu;
 	private PhongBan objPhongBan;
-	private boolean isBlocked;
 	
 	private NguoiDung(Builder builder) {
 		maND = builder.maND;
@@ -30,7 +29,6 @@ public class NguoiDung {
 		phanQuyen = builder.phanQuyen;
 		objChucVu = builder.objChucVu;
 		objPhongBan = builder.objPhongBan;
-		isBlocked = builder.isBlocked;
 	}
 	
 	public static class Builder {
@@ -46,7 +44,6 @@ public class NguoiDung {
 		private int phanQuyen;
 		private ChucVu objChucVu;
 		private PhongBan objPhongBan;
-		private boolean isBlocked;
 		
 		public Builder() {
 			
@@ -115,12 +112,6 @@ public class NguoiDung {
 			this.objPhongBan = objPhongBan;
 			return this;
 		}
-
-		public Builder setBlocked(boolean isBlocked) {
-			this.isBlocked = isBlocked;
-			return this;
-		}
-		
 	}
 
 	public int getMaND() {
@@ -217,14 +208,6 @@ public class NguoiDung {
 
 	public void setObjPhongBan(PhongBan objPhongBan) {
 		this.objPhongBan = objPhongBan;
-	}
-	
-	public boolean isBlocked() {
-		return isBlocked;
-	}
-
-	public void setBlocked(boolean isBlocked) {
-		this.isBlocked = isBlocked;
 	}
 
 	@Override
