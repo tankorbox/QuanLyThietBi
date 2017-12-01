@@ -58,6 +58,15 @@ public class ThietBiBlockController extends HttpServlet {
 			int maTB = Integer.parseInt(request.getParameter("maTB"));
 			ThietBi thietBi = thModels.getById(maTB);
 			int block = thModels.blockThietBi(thietBi);
+			if(block>0) {
+				int change = -1;
+				if(thietBi.isBlocked()) {
+					change = 1;
+				}
+				//thay doi so luong thiet bi loai 2
+				loaithietbiModels ltbModel = new loaithietbiModels();
+				ltbModel.changeSL(thietBi.getMaLoaiTB(),change);
+			}
 			response.sendRedirect(request.getContextPath()+"/thietbi?block="+block);
 			return;
 	}

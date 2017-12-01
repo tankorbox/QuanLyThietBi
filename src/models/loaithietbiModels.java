@@ -326,4 +326,43 @@ public class loaithietbiModels {
 		return result;
 	}
 
+	public LoaiThietBi getThietBiMuc1(int maLoaiCha) {
+		LoaiThietBi loaiTB = null;
+		String query = "SELECT isBlocked FROM LoaiTB WHERE MaLoai = ?";
+		conn = lcdb.GetConnectMySQL();
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setInt(1, maLoaiCha);
+			rs = pst.executeQuery();
+			if(rs.next()) {
+				LoaiThietBi.Builder ltbBuilder = new LoaiThietBi.Builder();
+				loaiTB = ltbBuilder.setBlocked(rs.getBoolean("isBlocked")).build();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return loaiTB;
+	}
+
+	public void changeSL(int maLoaiTB, int change) {
+		conn = lcdb.GetConnectMySQL();
+		String query = "UPDATE LoaiTB SET SoLuong = SoLuong + ? WHERE MaLoai = ?";
+		try {
+			pst = conn.prepareStatement(query);
+			pst.setInt(1, change);
+			pst.setInt(2, maLoaiTB);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pst.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }
