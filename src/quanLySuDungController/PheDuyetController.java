@@ -2,6 +2,8 @@ package quanLySuDungController;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,38 +66,40 @@ public class PheDuyetController extends HttpServlet {
 		
 		int maTTDK =Integer.parseInt(request.getParameter("maTTDK"));
 		int maNguoiMuon = Integer.parseInt(request.getParameter("maNguoiMuon"));
-		Timestamp dkBatDauSuDung = Timestamp.valueOf(request.getParameter("dkBatDauSuDung"));
-		Timestamp dkKetThucSuDung = Timestamp.valueOf(request.getParameter("dkKetThucSuDung"));
+		Long dkKetThucSuDung = Long.parseLong(request.getParameter("dkKetThucSuDung"));
+		Long dkBatDauSuDung = Long.parseLong(request.getParameter("dkBatDauSuDung"));
+		int maLoai = Integer.parseInt(request.getParameter("maLoai"));
 		int soLuong = Integer.parseInt(request.getParameter("soLuong"));
-		int maLoaiTB = Integer.parseInt(request.getParameter("maLoaiTB"));
 		
-		int maNguoiPheDuyet = 2;
+		int maNguoiPheDuyet = objUser.getMaND();
 		
-		ThongTinDangKy.Builder builderTTDK = new ThongTinDangKy.Builder();
-		ThongTinDangKy objTTDK = builderTTDK.setMaTTDK(maTTDK)
-				.setMaNguoiMuon(maNguoiMuon)
-				.setMaLoaiTB(maLoaiTB)
-				.setDKBatDauSuDung(dkBatDauSuDung)
-				.setDKKetThucSuDung(dkKetThucSuDung)
-				.setSoLuongDK(soLuong)
-				.build();
+		//Từ chối các đăng ký bị trùng
+		ArrayList<ThongTinDangKy> alTuChoi = khadung.PheDuyetTrung(maTTDK, maLoai, dkBatDauSuDung, dkKetThucSuDung, soLuong);
+		if(alTuChoi.size() > 0) {
+			String thongBao = "Đã có đơn đăng ký khác được phê duyệt và đơn đăng ký của bạn "
+					+ "không đảm bảo số lượng thiết bị trong thời gian bạn đăng ký sử dụng.";
+			int[] arMaTTDK = new int[alTuChoi.size()];
+			for (int i=0; i<alTuChoi.size(); i++) {
+				arMaTTDK[i] = alTuChoi.get(i).getMaTTDK();
+			}
+			mTTDK.TuChoi(arMaTTDK, thongBao);
+		}
 		
-		ThongTinSuDung.Builder builderTTSD = new ThongTinSuDung.Builder();
-		ThongTinSuDung objTTSD = builderTTSD.setMaTTDK(maTTDK)
+		//cập nhật TTDK
+		mTTDK.SuaTinhTrang(2, maTTDK);
+		
+		//Thêm sử dụng mới vào bảng TTSD
+		ThongTinSuDung.Builder TTSDBuilder = new ThongTinSuDung.Builder();
+		ThongTinSuDung objTTSD = TTSDBuilder.setMaTTDK(maTTDK)
 				.setMaNguoiMuon(maNguoiMuon)
 				.setMaNguoiPheDuyet(maNguoiPheDuyet)
-				.setBatDauSuDung(dkBatDauSuDung)
-				.setKetThucSuDung(dkKetThucSuDung)
-				.setTinhTrang(1)
+				.setBatDauSuDung(new Timestamp(dkBatDauSuDung))
+				.setKetThucSuDung(new Timestamp(dkKetThucSuDung))
 				.build();
-		
-		int soLuongKhaDung = khadung.TinhSoLuongKhaDung(maLoaiTB, dkBatDauSuDung, dkKetThucSuDung);
-		
-		if(soLuongKhaDung >= soLuong) { //dang ky dat yeu cau
-			mTTDK.SuaTinhTrang(2, maTTDK);
-			mTTSD.ThemSuDungMoi(objTTSD);
+				
+		if (mTTSD.ThemSuDungMoi(objTTSD) == 1) {
 			response.sendRedirect(request.getContextPath() + "/qlsd-pheduyetdangky?msgpheduyet=1");
-		} else { //dang ky khong dat yeu cau
+		} else {
 			response.sendRedirect(request.getContextPath() + "/qlsd-pheduyetdangky?msgpheduyet=0");
 		}
 	}

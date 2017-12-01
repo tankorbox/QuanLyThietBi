@@ -9,8 +9,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.LoaiThietBi;
+import beans.NguoiDung;
 import beans.ThongTinDangKy;
 import library.LibraryFormatDateTime;
 import library.LibraryLogin;
@@ -53,13 +55,15 @@ public class DangKySuDungController extends HttpServlet {
 		thongtindangkyModels mTTDK = new thongtindangkyModels();
 		
 		if(request.getParameter("type").equals("dangky")) {
-			int maNguoiMuon = 4; // get tu sesson
+			HttpSession session = request.getSession();
+			NguoiDung objUser = (NguoiDung)session.getAttribute("nguoidung");
+			int maNguoiMuon = objUser.getMaND(); // get tu sesson
 			int maLoai = Integer.parseInt(request.getParameter("maLoaiTB"));
 			Timestamp thoiGianDangKy = new Timestamp(new Date().getTime());
 			Timestamp batDauSuDung = lbDateTime.DateTimeFormToTimestamp(request.getParameter("batdausudung"));
 			Timestamp ketThucSuDung = lbDateTime.DateTimeFormToTimestamp(request.getParameter("ketthucsudung"));
 			int soLuongDK = Integer.parseInt(request.getParameter("soluongdangky"));
-			String mucDichSuDung = request.getParameter("mucdichsudung");
+			String mucDichSuDung = new String(request.getParameter("mucdichsudung").getBytes("ISO-8859-1"), "UTF-8"); 
 			
 			ThongTinDangKy.Builder builder = new ThongTinDangKy.Builder();
 			ThongTinDangKy objTTDK = builder.setMaNguoiMuon(maNguoiMuon)
@@ -83,7 +87,7 @@ public class DangKySuDungController extends HttpServlet {
 			request.setAttribute("loaiTB", LoaiTB);
 			
 			//lay danh sach da dang ky
-			request.setAttribute("alTTDK", mTTDK.getListByMaLoai(maLoaiTB));
+			request.setAttribute("alTTDK", mTTDK.getListTrung(maLoaiTB));
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/admin/chucnangnguoimuon/dangkysudung.jsp");
 			rd.forward(request, response);

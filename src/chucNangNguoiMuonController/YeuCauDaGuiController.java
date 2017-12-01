@@ -45,6 +45,7 @@ public class YeuCauDaGuiController extends HttpServlet {
 			return;
 		}
 		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html");
 		
 		int maND = 4;
 		

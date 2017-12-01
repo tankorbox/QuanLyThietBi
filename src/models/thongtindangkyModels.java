@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import beans.ChucVu;
 import beans.LoaiThietBi;
 import beans.NguoiDung;
@@ -57,6 +59,37 @@ public class thongtindangkyModels {
 		}
 		return alTTDK;
 	}
+	
+	// LAY DANH SACH TTDK đã đăng ký trước đó
+		public ArrayList<ThongTinDangKy> getListTrung(int maLoai) {
+			ArrayList<ThongTinDangKy> alTTDK = new ArrayList<>();
+			ThongTinDangKy.Builder builder = new ThongTinDangKy.Builder();
+			conn = lcdb.GetConnectMySQL();
+			String query = "SELECT * FROM ThongTinDangKy WHERE MaLoaiTB = ? AND TinhTrang = 1";
+			try {
+				pst = conn.prepareStatement(query);
+				pst.setInt(1, maLoai);
+				rs = pst.executeQuery();
+				while (rs.next()) {
+					ThongTinDangKy objItem = builder.setMaTTDK(rs.getInt("MaTTDK"))
+							.setDKBatDauSuDung(rs.getTimestamp("DKBatDauSuDung"))
+							.setDKKetThucSuDung(rs.getTimestamp("DKKetThucSuDung")).setSoLuongDK(rs.getInt("SoLuongDK"))
+							.build();
+					alTTDK.add(objItem);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					rs.close();
+					pst.close();
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return alTTDK;
+		}
 
 	// Them dang ky moi
 	public int ThemDangKy(ThongTinDangKy objTTDK) {
@@ -235,15 +268,24 @@ public class thongtindangkyModels {
 	}
 	
 	//Tu choi dang ky: TinhTrang = 3 , ThongBao = thongBao
-		public int TuChoi(int maTTDK, String thongBao) {
+		public int TuChoi(int[] maTTDK, String thongBao) {
 			int result = 0;
 			conn = lcdb.GetConnectMySQL();
-			String query = "UPDATE `ThongTinDangKy` SET `TinhTrang` = 3, ThongBao = ? WHERE `ThongTinDangKy`.`MaTTDK` = ?";
+			String query = "UPDATE `ThongTinDangKy` SET `TinhTrang` = 3, ThongBao = ? WHERE `ThongTinDangKy`.`MaTTDK` IN (";
+			for (int i = 0; i < maTTDK.length; i++) {
+				if(i == (maTTDK.length -1)) {
+					query += maTTDK[i];
+				} else {
+					query += maTTDK[i] + ",";
+				}
+				
+				
+			}
+			query += ")";
+			System.out.println(query);
 			try {
 				pst = conn.prepareStatement(query);
-				System.out.println(thongBao);
 				pst.setString(1, thongBao);
-				pst.setInt(2, maTTDK);
 				pst.executeUpdate();
 				result = 1;
 			} catch (SQLException e) {
@@ -259,5 +301,73 @@ public class thongtindangkyModels {
 				}
 			}
 			return result;
+		}
+		
+		//Lấy các đăng ký bị trùng để phê duyệt
+		public ArrayList<ThongTinDangKy> getListTrung(int maTTDK, int maLoai, Timestamp batDau, Timestamp ketThuc){
+			ArrayList<ThongTinDangKy> alTTDK = new ArrayList<>();
+			ThongTinDangKy.Builder builder = new ThongTinDangKy.Builder();
+			conn = lcdb.GetConnectMySQL();
+			String query = "SELECT * FROM `ThongTinDangKy` " +
+					"INNER JOIN NguoiDung on MaNguoiMuon = MaND\n" + 
+					"INNER JOIN PhongBan on PhongBan = MaPhongBan\n" + 
+					"INNER JOIN ChucVu on ChucVu = MaChucVu\n"
+					+ "WHERE TinhTrang = 1 AND MaLoaiTB = ? AND MaTTDK <> ? "
+					+ "AND (((DKBatDauSuDung BETWEEN ? AND ?) OR (DKKetThucSuDung BETWEEN ? AND ?)) "
+					+ "OR (DKBatDauSuDung < ? AND DKKetThucSuDung > ?))"; 
+			try {
+				pst = conn.prepareStatement(query);
+				pst.setInt(1, maLoai);
+				pst.setInt(2, maTTDK);
+				pst.setTimestamp(3, batDau);
+				pst.setTimestamp(4, ketThuc);
+				pst.setTimestamp(5, batDau);
+				pst.setTimestamp(6, ketThuc);
+				pst.setTimestamp(7, batDau);
+				pst.setTimestamp(8, ketThuc);
+				rs = pst.executeQuery();
+				
+				loaithietbiModels mLoaiTB = new loaithietbiModels();
+				NguoiDung.Builder builderND = new NguoiDung.Builder();
+				PhongBan.Builder builderPhongBan = new PhongBan.Builder();
+				ChucVu.Builder builderChucVu = new ChucVu.Builder();
+				while (rs.next()) {
+					//Lay thong tin doi tuong TTDK
+					ThongTinDangKy objItem = builder.setMaTTDK(rs.getInt("MaTTDK")).setMaLoaiTB(rs.getInt("MaLoaiTB"))
+							.setMaNguoiMuon(rs.getInt("MaNguoiMuon"))
+							.setThoiGianDangKy(rs.getTimestamp("ThoiGianDangKy"))
+							.setDKBatDauSuDung(rs.getTimestamp("DKBatDauSuDung"))
+							.setDKKetThucSuDung(rs.getTimestamp("DKKetThucSuDung")).setSoLuongDK(rs.getInt("SoLuongDK"))
+							.setMucDichSuDung(rs.getString("MucDichSuDung")).setTinhTrang(rs.getInt("TinhTrang"))
+							.setThongBao(rs.getString("ThongBao")).build();
+					//Lay thong tin loai thiet bi
+					objItem.setObjLoaiTB(mLoaiTB.getItemByMaLoai(objItem.getMaLoaiTB()));
+					//Lay thong tin phong ban
+					PhongBan objPhongBan = builderPhongBan.setTenPhongBan(rs.getString("TenPhongBan")).build();
+					//Lay thong tin chuc vu
+					ChucVu objChucVu = builderChucVu.setTenChucVu(rs.getString("TenChucVu")).build();
+					//Lay thong tin nguoi dung
+					NguoiDung objND = builderND.setMaND(rs.getInt("MaND"))
+							.setTenND(rs.getString("TenND"))
+							.setPhongBan(rs.getInt("PhongBan"))
+							.setChucVu(rs.getInt("ChucVu"))
+							.setObjChucVu(objChucVu)
+							.setObjPhongBan(objPhongBan)
+							.build();
+					objItem.setObjNguoiDung(objND);
+					alTTDK.add(objItem);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					rs.close();
+					pst.close();
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return alTTDK;
 		}
 }
