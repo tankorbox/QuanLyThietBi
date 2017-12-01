@@ -53,7 +53,7 @@
 					%>
 					<tr>
 						<td class="text-center"><%=objTTDK.getMaTTDK()%></td>
-						<td>Phan Thanh Thuận</td>
+						<td><%= objTTDK.getObjNguoiDung().getTenND() %></td>
 						<td><%=objTTDK.getObjLoaiTB().getTenLoai()%></td>
 						<td><%=objTTDK.getObjLoaiTB().getObjLoaiCha().getTenLoai()%></td>
 						<td class="text-center"><%=objTTDK.getSoLuongDK()%></td>
@@ -242,7 +242,6 @@
 	            	ketThuc: ketThuc
 	            },
 	            success: function(data){
-	            	alert("sdfds");
 	          	},
 	           	error: function (){
 	            	//Xử lý nếu có lỗi

@@ -108,7 +108,7 @@
             <div class="form-row">
               <div class="col-md-6">
                 <label for="Mucdichsudung">Mục đích sử dụng</label>
-                <textarea rows="5" cols="80" name="mucdichsudung"></textarea>
+                <textarea rows="5" cols="80" name="mucdichsudung" required></textarea>
               </div>
           </div>
           <div class="form-group">
