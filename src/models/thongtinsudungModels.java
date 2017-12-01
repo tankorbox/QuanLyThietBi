@@ -199,7 +199,7 @@ public class thongtinsudungModels {
 		public int ThemSuDungMoi(ThongTinSuDung objTTSD) {
 			int result = 0;
 			conn = lcdb.GetConnectMySQL();
-			String query = "INSERT INTO `ThongTinSuDung` (`MaTTDK`, `MaNguoiMuon`, `MaNguoiPheDuyet`, `BatDauSuDung`, `KetThucSuDung`, `TinhTrang`, `SoLuongMuon`) VALUES (?, ?, ?, ?, ?, 1, 0);";
+			String query = "INSERT INTO `ThongTinSuDung` (`MaTTDK`, `MaNguoiMuon`, `MaNguoiPheDuyet`, `BatDauSuDung`, `KetThucSuDung`, `TinhTrang`, `SoLuongMuon`) VALUES (?, ?, ?, ?, ?, 1, ?);";
 			try {
 				pst = conn.prepareStatement(query);
 				pst.setInt(1, objTTSD.getMaTTDK());
@@ -207,6 +207,7 @@ public class thongtinsudungModels {
 				pst.setInt(3, objTTSD.getMaNguoiPheDuyet());
 				pst.setTimestamp(4, objTTSD.getBatDauSuDung());
 				pst.setTimestamp(5, objTTSD.getKetThucSuDung());
+				pst.setInt(6, objTTSD.getObjTTDK().getSoLuongDK());
 				pst.executeUpdate();
 				result = 1;
 			} catch (SQLException e) {
